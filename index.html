@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ImmoAI — Solutions IA pour agents immobiliers</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #0B1F3A;
+      --navy2:  #122B50;
+      --gold:   #C9A84C;
+      --gold2:  #E2C27D;
+      --white:  #FFFFFF;
+      --off:    #F4F6FA;
+      --muted:  #6B7A99;
+      --radius: 12px;
+      --shadow: 0 4px 32px rgba(11,31,58,.12);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── Typography ── */
+    h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.15; font-weight: 800; }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2.4rem); line-height: 1.2; font-weight: 700; }
+    h3 { font-size: 1.1rem; font-weight: 700; }
+    p  { line-height: 1.75; }
+
+    /* ── Utility ── */
+    .gold { color: var(--gold); }
+    .container { width: min(1120px, 92%); margin-inline: auto; }
+    .tag {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      border: 1px solid rgba(201,168,76,.3);
+      border-radius: 20px;
+      padding: .3em 1em;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── Scroll-reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .22s; }
+    .reveal-delay-3 { transition-delay: .34s; }
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(11,31,58,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,.15);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: .55rem;
+      text-decoration: none; color: var(--white);
+      font-size: 1.25rem; font-weight: 800;
+    }
+    .logo-dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: .88rem;
+      padding: .55em 1.4em;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    #hero {
+      min-height: 100svh;
+      display: flex; align-items: center;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,.08) 0%, transparent 65%),
+        linear-gradient(160deg, var(--navy) 0%, var(--navy2) 100%);
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* subtle grid overlay */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-text { color: var(--white); }
+    .hero-text h1 { margin-bottom: 1.2rem; }
+    .hero-text h1 em { font-style: normal; color: var(--gold); }
+    .hero-subtitle {
+      font-size: 1.12rem;
+      color: rgba(255,255,255,.78);
+      margin-bottom: 2.4rem;
+      max-width: 500px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: .85em 2em;
+      border-radius: 40px;
+      text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(201,168,76,.35);
+    }
+    .btn-primary:hover {
+      background: var(--gold2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,168,76,.45);
+    }
+    .btn-primary svg { width: 18px; height: 18px; }
+
+    /* Floating card */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .visual-card {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(201,168,76,.2);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 340px;
+      backdrop-filter: blur(8px);
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-14px); }
+    }
+    .vc-header {
+      display: flex; align-items: center; gap: .7rem;
+      color: var(--white); font-weight: 700; font-size: .95rem;
+      margin-bottom: 1.4rem;
+    }
+    .vc-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border-radius: 10px;
+      display: grid; place-items: center;
+      font-size: 1.1rem;
+    }
+    .vc-stat {
+      background: rgba(255,255,255,.06);
+      border-radius: 10px;
+      padding: .9rem 1.1rem;
+      margin-bottom: .7rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .vc-stat:last-child { margin-bottom: 0; }
+    .vc-label { color: rgba(255,255,255,.6); font-size: .83rem; }
+    .vc-value { color: var(--gold); font-weight: 800; font-size: 1.1rem; }
+    .vc-bar { height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; margin-top: .4rem; overflow: hidden; }
+    .vc-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      animation: grow 2s ease forwards;
+    }
+    @keyframes grow { from { width: 0; } }
+
+    /* stats strip */
+    .hero-stats {
+      display: flex; gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+    .stat-item { color: var(--white); }
+    .stat-num { font-size: 1.6rem; font-weight: 800; color: var(--gold); }
+    .stat-lbl { font-size: .78rem; color: rgba(255,255,255,.6); margin-top: .1rem; }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-subtitle { margin-inline: auto; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { order: -1; }
+      .visual-card { width: 100%; max-width: 320px; }
+    }
+
+    /* ══════════════════════════════════════
+       PROBLEM
+    ══════════════════════════════════════ */
+    #problem {
+      padding: 100px 0;
+      background: var(--off);
+    }
+    .section-head { text-align: center; margin-bottom: 4rem; }
+    .section-head h2 { margin-bottom: .8rem; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; max-width: 560px; margin-inline: auto; }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .problem-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2.2rem 2rem;
+      box-shadow: var(--shadow);
+      border-top: 3px solid var(--gold);
+      position: relative;
+      overflow: hidden;
+    }
+    .problem-card::after {
+      content: '';
+      position: absolute; bottom: 0; right: 0;
+      width: 80px; height: 80px;
+      background: radial-gradient(circle at bottom right, rgba(201,168,76,.07), transparent 70%);
+    }
+    .problem-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: rgba(201,168,76,.18);
+      line-height: 1;
+      margin-bottom: .8rem;
+    }
+    .problem-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .problem-card h3 { margin-bottom: .6rem; color: var(--navy); }
+    .problem-card p { color: var(--muted); font-size: .93rem; }
+
+    /* ══════════════════════════════════════
+       SOLUTION
+    ══════════════════════════════════════ */
+    #solution {
+      padding: 100px 0;
+      background: var(--navy);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    #solution::before {
+      content: '';
+      position: absolute; top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,168,76,.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    #solution::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -80px;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .solution-inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .solution-text .section-head { text-align: left; margin-bottom: 2rem; }
+    .solution-text h2 { color: var(--white); }
+    .solution-text p { color: rgba(255,255,255,.78); font-size: 1.05rem; margin-bottom: 1.8rem; }
+    .solution-features { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+    .solution-features li {
+      display: flex; align-items: flex-start; gap: .8rem;
+      color: rgba(255,255,255,.85); font-size: .95rem;
+    }
+    .check {
+      width: 22px; height: 22px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: .7rem;
+      color: var(--navy);
+      font-weight: 900;
+      margin-top: 2px;
+    }
+
+    /* Visual panel */
+    .solution-visual {
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .sol-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(201,168,76,.2);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.6rem;
+      display: flex; align-items: center; gap: 1.2rem;
+      transition: background .25s, transform .25s;
+    }
+    .sol-card:hover { background: rgba(255,255,255,.1); transform: translateX(6px); }
+    .sol-card-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border-radius: 12px;
+      display: grid; place-items: center;
+      font-size: 1.3rem;
+    }
+    .sol-card-text h3 { color: var(--white); margin-bottom: .25rem; }
+    .sol-card-text p { color: rgba(255,255,255,.6); font-size: .84rem; }
+
+    @media (max-width: 768px) {
+      .solution-inner { grid-template-columns: 1fr; }
+      .solution-text .section-head { text-align: center; }
+    }
+
+    /* ══════════════════════════════════════
+       FORM
+    ══════════════════════════════════════ */
+    #form-section {
+      padding: 100px 0;
+      background: var(--off);
+      scroll-margin-top: 68px;
+    }
+    .form-wrapper {
+      background: var(--white);
+      border-radius: 20px;
+      padding: clamp(2rem, 5vw, 4rem);
+      box-shadow: 0 8px 60px rgba(11,31,58,.1);
+      max-width: 760px;
+      margin-inline: auto;
+      border-top: 4px solid var(--gold);
+    }
+    .form-wrapper .section-head { margin-bottom: 2.5rem; }
+    .form-group { margin-bottom: 1.6rem; }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: .93rem;
+      color: var(--navy);
+      margin-bottom: .5rem;
+    }
+    .form-group label span { color: var(--gold); margin-left: .2rem; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      border: 1.5px solid #DDE3EE;
+      border-radius: 10px;
+      padding: .85rem 1.1rem;
+      font-size: .95rem;
+      font-family: inherit;
+      color: var(--navy);
+      background: var(--off);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,.15);
+      background: var(--white);
+    }
+    .form-group textarea { min-height: 90px; }
+    .form-hint { font-size: .8rem; color: var(--muted); margin-top: .35rem; }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 1rem;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(201,168,76,.3);
+      margin-top: .5rem;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    .btn-submit:hover { opacity: .9; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,.4); }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* Confirmation */
+    .confirmation {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+    .confirmation.show { display: block; }
+    .conf-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 2rem;
+      margin: 0 auto 1.5rem;
+      animation: pop .4s ease;
+    }
+    @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+    .confirmation h3 { font-size: 1.6rem; color: var(--navy); margin-bottom: .7rem; }
+    .confirmation p  { color: var(--muted); max-width: 400px; margin-inline: auto; }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.75);
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(201,168,76,.15);
+    }
+    .footer-logo {
+      display: inline-flex; align-items: center; gap: .55rem;
+      font-size: 1.3rem; font-weight: 800; color: var(--white);
+      margin-bottom: .8rem;
+    }
+    footer p { font-size: .9rem; line-height: 1.9; }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-sep { margin: .3rem 0; opacity: .4; border: none; border-top: 1px solid rgba(255,255,255,.2); width: 60px; margin-inline: auto; }
+    .footer-tagline { font-size: .78rem; color: rgba(255,255,255,.4); margin-top: 1.2rem; letter-spacing: .05em; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════ NAV ══════ -->
+  <nav>
+    <div class="container nav-inner">
+      <a class="logo" href="#">
+        <span class="logo-dot"></span>
+        ImmoAI
+      </a>
+      <a class="nav-cta" href="#form-section">Je participe à l'étude</a>
+    </div>
+  </nav>
+
+  <!-- ══════ HERO ══════ -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <span class="tag">Solutions IA · Bruxelles</span>
+          <h1>
+            Vous aidez vos clients à trouver<br>
+            le bien de leur vie.<br>
+            <em>Qui vous aide, vous&nbsp;?</em>
+          </h1>
+          <p class="hero-subtitle">
+            Nous construisons un outil intelligent pour que les agents immobiliers arrêtent de perdre
+            leur ressource la plus précieuse&nbsp;: <strong style="color:var(--gold)">le temps.</strong>
+          </p>
+          <a class="btn-primary" href="#form-section">
+            Je participe à l'étude
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-num">3h+</div>
+              <div class="stat-lbl">perdues / jour en tâches répétitives</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">60%</div>
+              <div class="stat-lbl">des relances jamais faites</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">100%</div>
+              <div class="stat-lbl">gratuit & confidentiel</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="visual-card">
+            <div class="vc-header">
+              <div class="vc-icon">🏠</div>
+              Assistant ImmoAI
+            </div>
+            <div class="vc-stat">
+              <div>
+                <div class="vc-label">Relances automatisées</div>
+                <div class="vc-bar"><div class="vc-fill" style="width:82%"></div></div>
+              </div>
+              <div class="vc-value">+82%</div>
+            </div>
+            <div class="vc-stat">
+              <div>
+                <div class="vc-label">Temps administratif</div>
+                <div class="vc-bar"><div class="vc-fill" style="width:65%;animation-delay:.3s"></div></div>
+              </div>
+              <div class="vc-value">−65%</div>
+            </div>
+            <div class="vc-stat">
+              <div>
+                <div class="vc-label">Satisfaction client</div>
+                <div class="vc-bar"><div class="vc-fill" style="width:90%;animation-delay:.6s"></div></div>
+              </div>
+              <div class="vc-value">+90%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ PROBLEM ══════ -->
+  <section id="problem">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Ce qu'on entend sur le terrain</span>
+        <h2>On vous a écouté sur le terrain</h2>
+        <p>Les agents immobiliers indépendants à Bruxelles font face aux mêmes obstacles, chaque jour.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card reveal reveal-delay-1">
+          <div class="problem-number">01</div>
+          <div class="problem-icon">📭</div>
+          <h3>Les relances tombent à l'eau</h3>
+          <p>Faute de temps, les prospects ne sont jamais relancés au bon moment. Des opportunités précieuses s'évaporent en silence.</p>
+        </div>
+        <div class="problem-card reveal reveal-delay-2">
+          <div class="problem-number">02</div>
+          <div class="problem-icon">⏱️</div>
+          <h3>Les tâches répétitives volent vos heures</h3>
+          <p>Rédiger des annonces, répondre aux mails similaires, mettre à jour les dossiers… Des heures englouties chaque jour.</p>
+        </div>
+        <div class="problem-card reveal reveal-delay-3">
+          <div class="problem-number">03</div>
+          <div class="problem-icon">🗑️</div>
+          <h3>Les outils existants restent inutilisés</h3>
+          <p>Trop complexes, trop génériques ou trop coûteux. Au final, on revient aux tablettes et aux post-its.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ SOLUTION ══════ -->
+  <section id="solution">
+    <div class="container">
+      <div class="solution-inner">
+        <div class="solution-text reveal">
+          <div class="section-head">
+            <span class="tag">Notre approche</span>
+            <h2>Une solution qui fonctionne vraiment</h2>
+          </div>
+          <p>
+            Pas un outil de plus à apprendre. Un assistant intelligent qui travaille en arrière-plan
+            pendant que vous faites ce que vous faites de mieux&nbsp;: <strong style="color:var(--gold)">vendre.</strong>
+          </p>
+          <ul class="solution-features">
+            <li><span class="check">✓</span> Conçu exclusivement avec des agents bruxellois</li>
+            <li><span class="check">✓</span> S'intègre à votre façon de travailler, sans formation</li>
+            <li><span class="check">✓</span> Automatise les tâches sans supprimer le contact humain</li>
+            <li><span class="check">✓</span> Simple, rapide, efficace dès le premier jour</li>
+          </ul>
+        </div>
+        <div class="solution-visual">
+          <div class="sol-card reveal reveal-delay-1">
+            <div class="sol-card-icon">🤖</div>
+            <div class="sol-card-text">
+              <h3>Relances automatiques</h3>
+              <p>Vos prospects relancés au bon moment, sans effort de votre part.</p>
+            </div>
+          </div>
+          <div class="sol-card reveal reveal-delay-2">
+            <div class="sol-card-icon">✍️</div>
+            <div class="sol-card-text">
+              <h3>Rédaction assistée</h3>
+              <p>Annonces et emails générés en quelques secondes, à votre ton.</p>
+            </div>
+          </div>
+          <div class="sol-card reveal reveal-delay-3">
+            <div class="sol-card-icon">📊</div>
+            <div class="sol-card-text">
+              <h3>Suivi centralisé</h3>
+              <p>Tous vos prospects et dossiers au même endroit, sans saisie manuelle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ FORM ══════ -->
+  <section id="form-section">
+    <div class="container">
+      <div class="form-wrapper reveal">
+        <div class="section-head">
+          <span class="tag">Étude de terrain — 5 min</span>
+          <h2>Aidez-nous à construire<br>l'outil dont vous avez besoin</h2>
+          <p>Vos réponses façonnent directement le produit. 100&nbsp;% confidentiel.</p>
+        </div>
+
+        <!-- Formulaire -->
+        <form id="survey-form" novalidate>
+
+          <div class="form-group">
+            <label for="q1">
+              1. Quelle tâche vous prend le plus de temps chaque semaine&nbsp;?
+              <span>*</span>
+            </label>
+            <textarea id="q1" name="q1" placeholder="Ex : répondre aux emails entrants, rédiger des annonces…" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="q2">
+              2. Comment gérez-vous vos relances prospects aujourd'hui&nbsp;?
+              <span>*</span>
+            </label>
+            <textarea id="q2" name="q2" placeholder="Ex : tableur Excel, post-it, CRM, de mémoire…" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="q3">
+              3. Quels outils digitaux utilisez-vous actuellement&nbsp;?
+              <span>*</span>
+            </label>
+            <textarea id="q3" name="q3" placeholder="Ex : Outlook, WhatsApp Business, Immoweb, Trello…" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="q4">
+              4. Qu'est-ce qui vous ferait gagner le plus de temps&nbsp;?
+              <span>*</span>
+            </label>
+            <textarea id="q4" name="q4" placeholder="Décrivez librement votre idéal…" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="email">
+              5. Votre email professionnel
+              <span>*</span>
+            </label>
+            <input type="email" id="email" name="email" placeholder="vous@agence.be" required />
+            <div class="form-hint">Nous ne partageons jamais vos données. Jamais.</div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submit-btn">
+            Envoyer mes réponses
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Confirmation -->
+        <div class="confirmation" id="confirmation">
+          <div class="conf-icon">🎉</div>
+          <h3>Merci&nbsp;!</h3>
+          <p>Nous reviendrons vers vous avec les résultats.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ FOOTER ══════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">
+        <span class="logo-dot"></span>
+        ImmoAI
+      </div>
+      <hr class="footer-sep" />
+      <p>
+        <strong style="color:var(--white)">Abdelkrim Amrani</strong><br>
+        Fondateur · Solutions IA pour agents immobiliers · Bruxelles<br>
+        <a href="mailto:[À COMPLÉTER]">[À COMPLÉTER]</a>
+      </p>
+      <p class="footer-tagline">© 2025 ImmoAI — Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <!-- ══════ JS ══════ -->
+  <script>
+    /* ── Scroll reveal ── */
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Navbar scroll style ── */
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.boxShadow =
+        window.scrollY > 20 ? '0 4px 24px rgba(11,31,58,.3)' : 'none';
+    });
+
+    /* ── Google Apps Script URL ── */
+    // REMPLACEZ cette URL par celle de votre Apps Script déployé :
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9qLIjdg3tY4D8ymfGATzUlARWi6w2GSUwCLTf8X8mjJ0iuLzoh41imVMxRekcG7Vg/exec';
+
+    /* ── Form submit ── */
+    document.getElementById('survey-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const fields = ['q1', 'q2', 'q3', 'q4', 'email'];
+      let valid = true;
+
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        el.style.borderColor = '';
+        if (!el.value.trim()) {
+          el.style.borderColor = '#E8523A';
+          el.focus();
+          valid = false;
+        }
+      });
+
+      if (!valid) return;
+
+      // Email validation
+      const emailEl = document.getElementById('email');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+        emailEl.style.borderColor = '#E8523A';
+        emailEl.focus();
+        return;
+      }
+
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours…';
+
+      const payload = {
+        q1: document.getElementById('q1').value.trim(),
+        q2: document.getElementById('q2').value.trim(),
+        q3: document.getElementById('q3').value.trim(),
+        q4: document.getElementById('q4').value.trim(),
+        email: emailEl.value.trim()
+      };
+
+      const formData = new FormData();
+      formData.append('q1', payload.q1);
+      formData.append('q2', payload.q2);
+      formData.append('q3', payload.q3);
+      formData.append('q4', payload.q4);
+      formData.append('email', payload.email);
+
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      })
+      .then(() => {
+        document.getElementById('survey-form').style.display = 'none';
+        const conf = document.getElementById('confirmation');
+        conf.classList.add('show');
+        conf.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.textContent = 'Envoyer mes réponses';
+        alert('Erreur lors de l\'envoi. Veuillez réessayer.');
+      });
+    });
+  </script>
+</body>
+</html>
