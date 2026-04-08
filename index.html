@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ImmoAI — Solutions IA pour agents immobiliers</title>
+  <meta name="description" content="ImmoAI construit un assistant intelligent pour les agents immobiliers indépendants à Bruxelles. Participez à notre étude terrain." />
+  <meta property="og:title" content="ImmoAI — Solutions IA pour agents immobiliers" />
+  <meta property="og:description" content="Un assistant intelligent pour que les agents immobiliers arrêtent de perdre leur ressource la plus précieuse : le temps." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://immo-ai.online" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     /* ── Reset & base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,53 +23,100 @@
       --white:  #FFFFFF;
       --off:    #F4F6FA;
       --muted:  #6B7A99;
-      --radius: 12px;
-      --shadow: 0 4px 32px rgba(11,31,58,.12);
+      --radius: 14px;
+      --shadow: 0 4px 32px rgba(11,31,58,.14);
     }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Outfit', system-ui, -apple-system, sans-serif;
       color: var(--navy);
       background: var(--white);
       overflow-x: hidden;
     }
 
+    /* ── Skip to content (accessibility) ── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--gold);
+      color: var(--navy);
+      padding: .6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      z-index: 200;
+      text-decoration: none;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: .5rem; }
+
+    /* ── Grain overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: .028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 180px;
+    }
+
     /* ── Typography ── */
-    h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.15; font-weight: 800; }
-    h2 { font-size: clamp(1.5rem, 3.5vw, 2.4rem); line-height: 1.2; font-weight: 700; }
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      text-wrap: balance;
+    }
     h3 { font-size: 1.1rem; font-weight: 700; }
-    p  { line-height: 1.75; }
+    p  { line-height: 1.75; max-width: 65ch; }
 
     /* ── Utility ── */
     .gold { color: var(--gold); }
     .container { width: min(1120px, 92%); margin-inline: auto; }
     .tag {
       display: inline-block;
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .1em;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--gold);
-      background: rgba(201,168,76,.12);
-      border: 1px solid rgba(201,168,76,.3);
+      background: rgba(201,168,76,.1);
+      border: 1px solid rgba(201,168,76,.25);
       border-radius: 20px;
-      padding: .3em 1em;
+      padding: .35em 1.1em;
       margin-bottom: 1.2rem;
+    }
+
+    /* ── Focus visible ── */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
     }
 
     /* ── Scroll-reveal ── */
     .reveal {
       opacity: 0;
-      transform: translateY(36px);
-      transition: opacity .7s ease, transform .7s ease;
+      transform: translateY(32px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
     }
     .reveal.visible {
       opacity: 1;
       transform: none;
     }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .22s; }
-    .reveal-delay-3 { transition-delay: .34s; }
+    .reveal-delay-1 { transition-delay: .12s; }
+    .reveal-delay-2 { transition-delay: .24s; }
+    .reveal-delay-3 { transition-delay: .36s; }
 
     /* ══════════════════════════════════════
        NAV
@@ -69,9 +124,10 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(11,31,58,.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,168,76,.15);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,168,76,.12);
+      transition: box-shadow .3s;
     }
     .nav-inner {
       display: flex; align-items: center; justify-content: space-between;
@@ -81,6 +137,7 @@
       display: flex; align-items: center; gap: .55rem;
       text-decoration: none; color: var(--white);
       font-size: 1.25rem; font-weight: 800;
+      letter-spacing: -0.02em;
     }
     .logo-dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; }
     .nav-cta {
@@ -91,48 +148,49 @@
       padding: .55em 1.4em;
       border-radius: 30px;
       text-decoration: none;
-      transition: background .2s, transform .15s;
+      transition: background .25s cubic-bezier(.16,1,.3,1), transform .15s;
     }
     .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+    .nav-cta:active { transform: translateY(0) scale(.97); }
 
     /* ══════════════════════════════════════
        HERO
     ══════════════════════════════════════ */
     #hero {
-      min-height: 100svh;
+      min-height: 100dvh;
       display: flex; align-items: center;
       background:
-        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,.08) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 55% at 65% 35%, rgba(201,168,76,.07) 0%, transparent 65%),
         linear-gradient(160deg, var(--navy) 0%, var(--navy2) 100%);
       padding: 120px 0 80px;
       position: relative;
       overflow: hidden;
     }
-    /* subtle grid overlay */
     #hero::before {
       content: '';
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 60px 60px;
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 64px 64px;
       pointer-events: none;
     }
     .hero-inner {
       position: relative; z-index: 1;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.15fr .85fr;
       gap: 4rem;
       align-items: center;
     }
     .hero-text { color: var(--white); }
-    .hero-text h1 { margin-bottom: 1.2rem; }
+    .hero-text h1 { margin-bottom: 1.4rem; }
     .hero-text h1 em { font-style: normal; color: var(--gold); }
     .hero-subtitle {
-      font-size: 1.12rem;
-      color: rgba(255,255,255,.78);
-      margin-bottom: 2.4rem;
-      max-width: 500px;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: rgba(255,255,255,.72);
+      margin-bottom: 2.6rem;
+      max-width: 480px;
     }
     .btn-primary {
       display: inline-flex; align-items: center; gap: .5rem;
@@ -144,14 +202,15 @@
       border-radius: 40px;
       text-decoration: none;
       border: none; cursor: pointer;
-      transition: background .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 4px 20px rgba(201,168,76,.35);
+      transition: background .25s cubic-bezier(.16,1,.3,1), transform .15s, box-shadow .25s;
+      box-shadow: 0 4px 24px rgba(201,168,76,.3);
     }
     .btn-primary:hover {
       background: var(--gold2);
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(201,168,76,.45);
+      box-shadow: 0 8px 32px rgba(201,168,76,.4);
     }
+    .btn-primary:active { transform: translateY(0) scale(.97); }
     .btn-primary svg { width: 18px; height: 18px; }
 
     /* Floating card */
@@ -161,12 +220,13 @@
       align-items: center;
     }
     .visual-card {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(201,168,76,.2);
-      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+      border-radius: 22px;
       padding: 2rem;
       width: 340px;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       animation: float 6s ease-in-out infinite;
     }
     @keyframes float {
@@ -183,40 +243,40 @@
       background: linear-gradient(135deg, var(--gold), var(--gold2));
       border-radius: 10px;
       display: grid; place-items: center;
-      font-size: 1.1rem;
     }
+    .vc-icon svg { width: 20px; height: 20px; stroke: var(--navy); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .vc-stat {
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.05);
       border-radius: 10px;
       padding: .9rem 1.1rem;
       margin-bottom: .7rem;
       display: flex; align-items: center; justify-content: space-between;
     }
     .vc-stat:last-child { margin-bottom: 0; }
-    .vc-label { color: rgba(255,255,255,.6); font-size: .83rem; }
-    .vc-value { color: var(--gold); font-weight: 800; font-size: 1.1rem; }
-    .vc-bar { height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; margin-top: .4rem; overflow: hidden; }
+    .vc-label { color: rgba(255,255,255,.55); font-size: .82rem; font-weight: 500; }
+    .vc-value { color: var(--gold); font-weight: 800; font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+    .vc-bar { height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; margin-top: .45rem; overflow: hidden; }
     .vc-fill {
       height: 100%;
       border-radius: 2px;
       background: linear-gradient(90deg, var(--gold), var(--gold2));
-      animation: grow 2s ease forwards;
+      animation: grow 2s cubic-bezier(.16,1,.3,1) forwards;
     }
     @keyframes grow { from { width: 0; } }
 
     /* stats strip */
     .hero-stats {
       display: flex; gap: 2.5rem;
-      margin-top: 2.5rem;
+      margin-top: 2.8rem;
     }
     .stat-item { color: var(--white); }
-    .stat-num { font-size: 1.6rem; font-weight: 800; color: var(--gold); }
-    .stat-lbl { font-size: .78rem; color: rgba(255,255,255,.6); margin-top: .1rem; }
+    .stat-num { font-size: 1.7rem; font-weight: 800; color: var(--gold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .stat-lbl { font-size: .78rem; font-weight: 500; color: rgba(255,255,255,.5); margin-top: .15rem; }
 
     @media (max-width: 768px) {
       .hero-inner { grid-template-columns: 1fr; text-align: center; }
       .hero-subtitle { margin-inline: auto; }
-      .hero-stats { justify-content: center; }
+      .hero-stats { justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
       .hero-visual { order: -1; }
       .visual-card { width: 100%; max-width: 320px; }
     }
@@ -225,49 +285,69 @@
        PROBLEM
     ══════════════════════════════════════ */
     #problem {
-      padding: 100px 0;
+      padding: 110px 0;
       background: var(--off);
     }
     .section-head { text-align: center; margin-bottom: 4rem; }
     .section-head h2 { margin-bottom: .8rem; }
-    .section-head p { color: var(--muted); font-size: 1.05rem; max-width: 560px; margin-inline: auto; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin-inline: auto; }
 
     .problem-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
     }
     .problem-card {
       background: var(--white);
-      border-radius: var(--radius);
-      padding: 2.2rem 2rem;
-      box-shadow: var(--shadow);
-      border-top: 3px solid var(--gold);
+      border-radius: 18px;
+      padding: 2.4rem 2.2rem;
+      box-shadow: 0 4px 32px rgba(11,31,58,.08);
+      border-left: 3px solid var(--gold);
       position: relative;
-      overflow: hidden;
+      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
     }
-    .problem-card::after {
-      content: '';
-      position: absolute; bottom: 0; right: 0;
-      width: 80px; height: 80px;
-      background: radial-gradient(circle at bottom right, rgba(201,168,76,.07), transparent 70%);
+    .problem-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(11,31,58,.12);
     }
+    .problem-card:first-child {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.6rem;
+      align-items: center;
+    }
+    .problem-card:first-child .problem-left { display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+    .problem-card:not(:first-child) .problem-left { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
     .problem-number {
-      font-size: 2.8rem;
+      font-size: 2.4rem;
       font-weight: 900;
-      color: rgba(201,168,76,.18);
+      color: rgba(201,168,76,.2);
       line-height: 1;
-      margin-bottom: .8rem;
     }
-    .problem-icon { font-size: 1.8rem; margin-bottom: 1rem; }
-    .problem-card h3 { margin-bottom: .6rem; color: var(--navy); }
+    .problem-icon {
+      width: 44px; height: 44px;
+      background: rgba(201,168,76,.08);
+      border-radius: 12px;
+      display: grid; place-items: center;
+      flex-shrink: 0;
+    }
+    .problem-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .problem-card h3 { margin-bottom: .5rem; color: var(--navy); }
     .problem-card p { color: var(--muted); font-size: .93rem; }
+
+    @media (max-width: 768px) {
+      .problem-grid { grid-template-columns: 1fr; }
+      .problem-card:first-child { grid-template-columns: 1fr; text-align: center; }
+      .problem-card:first-child .problem-left { flex-direction: row; justify-content: center; }
+      .problem-card:not(:first-child) .problem-left { justify-content: center; }
+    }
 
     /* ══════════════════════════════════════
        SOLUTION
     ══════════════════════════════════════ */
     #solution {
-      padding: 100px 0;
+      padding: 110px 0;
       background: var(--navy);
       color: var(--white);
       position: relative;
@@ -277,14 +357,14 @@
       content: '';
       position: absolute; top: -120px; right: -120px;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(201,168,76,.1) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(201,168,76,.08) 0%, transparent 65%);
       pointer-events: none;
     }
     #solution::after {
       content: '';
       position: absolute; bottom: -80px; left: -80px;
       width: 350px; height: 350px;
-      background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(201,168,76,.05) 0%, transparent 65%);
       pointer-events: none;
     }
     .solution-inner {
@@ -296,45 +376,45 @@
     }
     .solution-text .section-head { text-align: left; margin-bottom: 2rem; }
     .solution-text h2 { color: var(--white); }
-    .solution-text p { color: rgba(255,255,255,.78); font-size: 1.05rem; margin-bottom: 1.8rem; }
-    .solution-features { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+    .solution-text > p { color: rgba(255,255,255,.72); font-size: 1.05rem; margin-bottom: 2rem; }
+    .solution-features { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
     .solution-features li {
       display: flex; align-items: flex-start; gap: .8rem;
-      color: rgba(255,255,255,.85); font-size: .95rem;
+      color: rgba(255,255,255,.8); font-size: .95rem;
+      font-weight: 500;
     }
     .check {
       width: 22px; height: 22px; flex-shrink: 0;
       background: linear-gradient(135deg, var(--gold), var(--gold2));
       border-radius: 50%;
       display: grid; place-items: center;
-      font-size: .7rem;
-      color: var(--navy);
-      font-weight: 900;
       margin-top: 2px;
     }
+    .check svg { width: 12px; height: 12px; stroke: var(--navy); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
     /* Visual panel */
     .solution-visual {
       display: flex; flex-direction: column; gap: 1.2rem;
     }
     .sol-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(201,168,76,.2);
-      border-radius: var(--radius);
-      padding: 1.4rem 1.6rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.07);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+      border-radius: 16px;
+      padding: 1.5rem 1.6rem;
       display: flex; align-items: center; gap: 1.2rem;
-      transition: background .25s, transform .25s;
+      transition: background .3s cubic-bezier(.16,1,.3,1), transform .3s cubic-bezier(.16,1,.3,1);
     }
-    .sol-card:hover { background: rgba(255,255,255,.1); transform: translateX(6px); }
+    .sol-card:hover { background: rgba(255,255,255,.09); transform: translateX(6px); }
     .sol-card-icon {
       width: 48px; height: 48px; flex-shrink: 0;
       background: linear-gradient(135deg, var(--gold), var(--gold2));
-      border-radius: 12px;
+      border-radius: 14px;
       display: grid; place-items: center;
-      font-size: 1.3rem;
     }
-    .sol-card-text h3 { color: var(--white); margin-bottom: .25rem; }
-    .sol-card-text p { color: rgba(255,255,255,.6); font-size: .84rem; }
+    .sol-card-icon svg { width: 24px; height: 24px; stroke: var(--navy); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .sol-card-text h3 { color: var(--white); margin-bottom: .3rem; }
+    .sol-card-text p { color: rgba(255,255,255,.55); font-size: .84rem; }
 
     @media (max-width: 768px) {
       .solution-inner { grid-template-columns: 1fr; }
@@ -345,16 +425,16 @@
        FORM
     ══════════════════════════════════════ */
     #form-section {
-      padding: 100px 0;
+      padding: 110px 0;
       background: var(--off);
       scroll-margin-top: 68px;
     }
     .form-wrapper {
       background: var(--white);
-      border-radius: 20px;
-      padding: clamp(2rem, 5vw, 4rem);
-      box-shadow: 0 8px 60px rgba(11,31,58,.1);
-      max-width: 760px;
+      border-radius: 22px;
+      padding: clamp(2rem, 5vw, 3.5rem);
+      box-shadow: 0 8px 48px rgba(11,31,58,.08);
+      max-width: 720px;
       margin-inline: auto;
       border-top: 4px solid var(--gold);
     }
@@ -379,7 +459,7 @@
       font-family: inherit;
       color: var(--navy);
       background: var(--off);
-      transition: border-color .2s, box-shadow .2s;
+      transition: border-color .25s, box-shadow .25s, background .25s;
       outline: none;
       resize: vertical;
     }
@@ -387,11 +467,11 @@
     .form-group textarea:focus,
     .form-group select:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(201,168,76,.15);
+      box-shadow: 0 0 0 3px rgba(201,168,76,.12);
       background: var(--white);
     }
-    .form-group textarea { min-height: 90px; }
-    .form-hint { font-size: .8rem; color: var(--muted); margin-top: .35rem; }
+    .form-group textarea { min-height: 88px; }
+    .form-hint { font-size: .8rem; color: var(--muted); margin-top: .35rem; font-weight: 500; }
 
     .btn-submit {
       width: 100%;
@@ -403,19 +483,20 @@
       border-radius: 40px;
       border: none;
       cursor: pointer;
-      transition: opacity .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 4px 20px rgba(201,168,76,.3);
-      margin-top: .5rem;
+      transition: opacity .25s, transform .15s, box-shadow .25s;
+      box-shadow: 0 4px 24px rgba(201,168,76,.25);
+      margin-top: .8rem;
       display: flex; align-items: center; justify-content: center; gap: .5rem;
     }
-    .btn-submit:hover { opacity: .9; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,.4); }
+    .btn-submit:hover { opacity: .92; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,.35); }
+    .btn-submit:active { transform: translateY(0) scale(.97); }
     .btn-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
     /* Confirmation */
     .confirmation {
       display: none;
       text-align: center;
-      padding: 2rem;
+      padding: 2.5rem 1rem;
     }
     .confirmation.show { display: block; }
     .conf-icon {
@@ -423,12 +504,12 @@
       background: linear-gradient(135deg, var(--gold), var(--gold2));
       border-radius: 50%;
       display: grid; place-items: center;
-      font-size: 2rem;
       margin: 0 auto 1.5rem;
-      animation: pop .4s ease;
+      animation: pop .4s cubic-bezier(.16,1,.3,1);
     }
+    .conf-icon svg { width: 32px; height: 32px; stroke: var(--navy); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
     @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
-    .confirmation h3 { font-size: 1.6rem; color: var(--navy); margin-bottom: .7rem; }
+    .confirmation h3 { font-size: 1.5rem; color: var(--navy); margin-bottom: .7rem; letter-spacing: -0.02em; }
     .confirmation p  { color: var(--muted); max-width: 400px; margin-inline: auto; }
 
     /* ══════════════════════════════════════
@@ -436,24 +517,28 @@
     ══════════════════════════════════════ */
     footer {
       background: var(--navy);
-      color: rgba(255,255,255,.75);
-      padding: 3rem 0;
+      color: rgba(255,255,255,.7);
+      padding: 3.5rem 0;
       text-align: center;
-      border-top: 1px solid rgba(201,168,76,.15);
+      border-top: 1px solid rgba(201,168,76,.1);
     }
     .footer-logo {
       display: inline-flex; align-items: center; gap: .55rem;
       font-size: 1.3rem; font-weight: 800; color: var(--white);
       margin-bottom: .8rem;
+      letter-spacing: -0.02em;
     }
     footer p { font-size: .9rem; line-height: 1.9; }
-    footer a { color: var(--gold); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    .footer-sep { margin: .3rem 0; opacity: .4; border: none; border-top: 1px solid rgba(255,255,255,.2); width: 60px; margin-inline: auto; }
-    .footer-tagline { font-size: .78rem; color: rgba(255,255,255,.4); margin-top: 1.2rem; letter-spacing: .05em; }
+    footer a { color: var(--gold); text-decoration: none; transition: color .2s; }
+    footer a:hover { color: var(--gold2); }
+    .footer-sep { margin: .5rem 0; opacity: .3; border: none; border-top: 1px solid rgba(255,255,255,.15); width: 60px; margin-inline: auto; }
+    .footer-tagline { font-size: .78rem; color: rgba(255,255,255,.35); margin-top: 1.4rem; letter-spacing: .04em; font-weight: 500; }
   </style>
 </head>
 <body>
+
+  <!-- Skip to content -->
+  <a class="skip-link" href="#form-section">Aller au formulaire</a>
 
   <!-- ══════ NAV ══════ -->
   <nav>
@@ -462,7 +547,7 @@
         <span class="logo-dot"></span>
         ImmoAI
       </a>
-      <a class="nav-cta" href="#form-section">Je participe à l'étude</a>
+      <a class="nav-cta" href="#form-section">Je participe</a>
     </div>
   </nav>
 
@@ -473,13 +558,13 @@
         <div class="hero-text">
           <span class="tag">Solutions IA · Bruxelles</span>
           <h1>
-            Vous aidez vos clients à trouver<br>
+            Vous aidez vos clients à trouver
             le bien de leur vie.<br>
-            <em>Qui vous aide, vous&nbsp;?</em>
+            <em>Qui vous aide, vous ?</em>
           </h1>
           <p class="hero-subtitle">
             Nous construisons un outil intelligent pour que les agents immobiliers arrêtent de perdre
-            leur ressource la plus précieuse&nbsp;: <strong style="color:var(--gold)">le temps.</strong>
+            leur ressource la plus précieuse : <strong style="color:var(--gold)">le temps.</strong>
           </p>
           <a class="btn-primary" href="#form-section">
             Je participe à l'étude
@@ -506,7 +591,9 @@
         <div class="hero-visual">
           <div class="visual-card">
             <div class="vc-header">
-              <div class="vc-icon">🏠</div>
+              <div class="vc-icon">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
               Assistant ImmoAI
             </div>
             <div class="vc-stat">
@@ -521,7 +608,7 @@
                 <div class="vc-label">Temps administratif</div>
                 <div class="vc-bar"><div class="vc-fill" style="width:65%;animation-delay:.3s"></div></div>
               </div>
-              <div class="vc-value">−65%</div>
+              <div class="vc-value">-65%</div>
             </div>
             <div class="vc-stat">
               <div>
@@ -545,23 +632,44 @@
         <p>Les agents immobiliers indépendants à Bruxelles font face aux mêmes obstacles, chaque jour.</p>
       </div>
       <div class="problem-grid">
+        <!-- Card 1 — full width -->
         <div class="problem-card reveal reveal-delay-1">
-          <div class="problem-number">01</div>
-          <div class="problem-icon">📭</div>
-          <h3>Les relances tombent à l'eau</h3>
-          <p>Faute de temps, les prospects ne sont jamais relancés au bon moment. Des opportunités précieuses s'évaporent en silence.</p>
+          <div class="problem-left">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+            </div>
+            <div class="problem-number">01</div>
+          </div>
+          <div>
+            <h3>Les relances tombent à l'eau</h3>
+            <p>Faute de temps, les prospects ne sont jamais relancés au bon moment. Des opportunités précieuses s'évaporent en silence.</p>
+          </div>
         </div>
+        <!-- Card 2 -->
         <div class="problem-card reveal reveal-delay-2">
-          <div class="problem-number">02</div>
-          <div class="problem-icon">⏱️</div>
-          <h3>Les tâches répétitives volent vos heures</h3>
-          <p>Rédiger des annonces, répondre aux mails similaires, mettre à jour les dossiers… Des heures englouties chaque jour.</p>
+          <div class="problem-left">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="problem-number">02</div>
+          </div>
+          <div>
+            <h3>Les tâches répétitives volent vos heures</h3>
+            <p>Rédiger des annonces, répondre aux mails similaires, mettre à jour les dossiers... Des heures englouties chaque jour.</p>
+          </div>
         </div>
+        <!-- Card 3 -->
         <div class="problem-card reveal reveal-delay-3">
-          <div class="problem-number">03</div>
-          <div class="problem-icon">🗑️</div>
-          <h3>Les outils existants restent inutilisés</h3>
-          <p>Trop complexes, trop génériques ou trop coûteux. Au final, on revient aux tablettes et aux post-its.</p>
+          <div class="problem-left">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div class="problem-number">03</div>
+          </div>
+          <div>
+            <h3>Les outils existants restent inutilisés</h3>
+            <p>Trop complexes, trop génériques ou trop coûteux. Au final, on revient aux tableurs et aux post-its.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -578,32 +686,38 @@
           </div>
           <p>
             Pas un outil de plus à apprendre. Un assistant intelligent qui travaille en arrière-plan
-            pendant que vous faites ce que vous faites de mieux&nbsp;: <strong style="color:var(--gold)">vendre.</strong>
+            pendant que vous faites ce que vous faites de mieux : <strong style="color:var(--gold)">vendre.</strong>
           </p>
           <ul class="solution-features">
-            <li><span class="check">✓</span> Conçu exclusivement avec des agents bruxellois</li>
-            <li><span class="check">✓</span> S'intègre à votre façon de travailler, sans formation</li>
-            <li><span class="check">✓</span> Automatise les tâches sans supprimer le contact humain</li>
-            <li><span class="check">✓</span> Simple, rapide, efficace dès le premier jour</li>
+            <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Conçu exclusivement avec des agents bruxellois</li>
+            <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> S'intègre à votre façon de travailler, sans formation</li>
+            <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Automatise les tâches sans supprimer le contact humain</li>
+            <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Simple, rapide, efficace dès le premier jour</li>
           </ul>
         </div>
         <div class="solution-visual">
           <div class="sol-card reveal reveal-delay-1">
-            <div class="sol-card-icon">🤖</div>
+            <div class="sol-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/><circle cx="18" cy="5" r="3"/></svg>
+            </div>
             <div class="sol-card-text">
               <h3>Relances automatiques</h3>
               <p>Vos prospects relancés au bon moment, sans effort de votre part.</p>
             </div>
           </div>
           <div class="sol-card reveal reveal-delay-2">
-            <div class="sol-card-icon">✍️</div>
+            <div class="sol-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
             <div class="sol-card-text">
               <h3>Rédaction assistée</h3>
               <p>Annonces et emails générés en quelques secondes, à votre ton.</p>
             </div>
           </div>
           <div class="sol-card reveal reveal-delay-3">
-            <div class="sol-card-icon">📊</div>
+            <div class="sol-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/><path d="M22 12A10 10 0 0 0 12 2"/></svg>
+            </div>
             <div class="sol-card-text">
               <h3>Suivi centralisé</h3>
               <p>Tous vos prospects et dossiers au même endroit, sans saisie manuelle.</p>
@@ -621,53 +735,31 @@
         <div class="section-head">
           <span class="tag">Étude de terrain — 5 min</span>
           <h2>Aidez-nous à construire<br>l'outil dont vous avez besoin</h2>
-          <p>Vos réponses façonnent directement le produit. 100&nbsp;% confidentiel.</p>
+          <p>Vos réponses façonnent directement le produit. 100 % confidentiel.</p>
         </div>
 
-        <!-- Formulaire -->
         <form id="survey-form" novalidate>
-
           <div class="form-group">
-            <label for="q1">
-              1. Quelle tâche vous prend le plus de temps chaque semaine&nbsp;?
-              <span>*</span>
-            </label>
-            <textarea id="q1" name="q1" placeholder="Ex : répondre aux emails entrants, rédiger des annonces…" required></textarea>
+            <label for="q1">1. Quelle tâche vous prend le plus de temps chaque semaine ?<span>*</span></label>
+            <textarea id="q1" name="q1" placeholder="Ex : répondre aux emails entrants, rédiger des annonces..." required></textarea>
           </div>
-
           <div class="form-group">
-            <label for="q2">
-              2. Comment gérez-vous vos relances prospects aujourd'hui&nbsp;?
-              <span>*</span>
-            </label>
-            <textarea id="q2" name="q2" placeholder="Ex : tableur Excel, post-it, CRM, de mémoire…" required></textarea>
+            <label for="q2">2. Comment gérez-vous vos relances prospects aujourd'hui ?<span>*</span></label>
+            <textarea id="q2" name="q2" placeholder="Ex : tableur Excel, post-it, CRM, de mémoire..." required></textarea>
           </div>
-
           <div class="form-group">
-            <label for="q3">
-              3. Quels outils digitaux utilisez-vous actuellement&nbsp;?
-              <span>*</span>
-            </label>
-            <textarea id="q3" name="q3" placeholder="Ex : Outlook, WhatsApp Business, Immoweb, Trello…" required></textarea>
+            <label for="q3">3. Quels outils digitaux utilisez-vous actuellement ?<span>*</span></label>
+            <textarea id="q3" name="q3" placeholder="Ex : Outlook, WhatsApp Business, Immoweb, Trello..." required></textarea>
           </div>
-
           <div class="form-group">
-            <label for="q4">
-              4. Qu'est-ce qui vous ferait gagner le plus de temps&nbsp;?
-              <span>*</span>
-            </label>
-            <textarea id="q4" name="q4" placeholder="Décrivez librement votre idéal…" required></textarea>
+            <label for="q4">4. Qu'est-ce qui vous ferait gagner le plus de temps ?<span>*</span></label>
+            <textarea id="q4" name="q4" placeholder="Décrivez librement votre idéal..." required></textarea>
           </div>
-
           <div class="form-group">
-            <label for="email">
-              5. Votre email professionnel
-              <span>*</span>
-            </label>
+            <label for="email">5. Votre email professionnel<span>*</span></label>
             <input type="email" id="email" name="email" placeholder="vous@agence.be" required />
             <div class="form-hint">Nous ne partageons jamais vos données. Jamais.</div>
           </div>
-
           <button type="submit" class="btn-submit" id="submit-btn">
             Envoyer mes réponses
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -676,10 +768,11 @@
           </button>
         </form>
 
-        <!-- Confirmation -->
         <div class="confirmation" id="confirmation">
-          <div class="conf-icon">🎉</div>
-          <h3>Merci&nbsp;!</h3>
+          <div class="conf-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Merci</h3>
           <p>Nous reviendrons vers vous avec les résultats.</p>
         </div>
       </div>
@@ -715,11 +808,10 @@
     /* ── Navbar scroll style ── */
     window.addEventListener('scroll', () => {
       document.querySelector('nav').style.boxShadow =
-        window.scrollY > 20 ? '0 4px 24px rgba(11,31,58,.3)' : 'none';
+        window.scrollY > 20 ? '0 4px 28px rgba(11,31,58,.25)' : 'none';
     });
 
     /* ── Google Apps Script URL ── */
-    // REMPLACEZ cette URL par celle de votre Apps Script déployé :
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9qLIjdg3tY4D8ymfGATzUlARWi6w2GSUwCLTf8X8mjJ0iuLzoh41imVMxRekcG7Vg/exec';
 
     /* ── Form submit ── */
@@ -741,7 +833,6 @@
 
       if (!valid) return;
 
-      // Email validation
       const emailEl = document.getElementById('email');
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
         emailEl.style.borderColor = '#E8523A';
@@ -751,7 +842,7 @@
 
       const btn = document.getElementById('submit-btn');
       btn.disabled = true;
-      btn.textContent = 'Envoi en cours…';
+      btn.textContent = 'Envoi en cours...';
 
       const payload = {
         q1: document.getElementById('q1').value.trim(),
