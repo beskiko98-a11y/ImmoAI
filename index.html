@@ -1,18 +1,79 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ImmoAI — Solutions IA pour agents immobiliers</title>
-  <meta name="description" content="ImmoAI construit un assistant intelligent pour les agents immobiliers indépendants à Bruxelles." />
-  <meta property="og:title" content="ImmoAI — Solutions IA pour agents immobiliers" />
-  <meta property="og:description" content="Un assistant intelligent pour que les agents immobiliers arrêtent de perdre leur ressource la plus précieuse : le temps." />
+
+  <!-- ══════ SEO ESSENTIALS ══════ -->
+  <title>ImmoAI — Assistant IA pour agents immobiliers indépendants à Bruxelles</title>
+  <meta name="description" content="ImmoAI développe un assistant intelligent qui automatise relances, rédaction d'annonces et suivi prospects pour les agents immobiliers indépendants à Bruxelles. Participez à notre étude terrain gratuite." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="ImmoAI — Abdelkrim Amrani" />
+  <link rel="canonical" href="https://immo-ai.online/" />
+
+  <!-- ══════ OPEN GRAPH ══════ -->
+  <meta property="og:title" content="ImmoAI — Assistant IA pour agents immobiliers à Bruxelles" />
+  <meta property="og:description" content="Un assistant intelligent pour que les agents immobiliers arrêtent de perdre leur ressource la plus précieuse : le temps. Participez à notre étude gratuite." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://immo-ai.online" />
+  <meta property="og:url" content="https://immo-ai.online/" />
+  <meta property="og:locale" content="fr_BE" />
+  <meta property="og:site_name" content="ImmoAI" />
+  <!-- TODO: Ajouter une image OG 1200x630 -->
+  <!-- <meta property="og:image" content="https://immo-ai.online/og-image.jpg" /> -->
+  <!-- <meta property="og:image:width" content="1200" /> -->
+  <!-- <meta property="og:image:height" content="630" /> -->
+
+  <!-- ══════ TWITTER CARDS ══════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ImmoAI — Assistant IA pour agents immobiliers à Bruxelles" />
+  <meta name="twitter:description" content="Un assistant intelligent pour que les agents immobiliers arrêtent de perdre leur ressource la plus précieuse : le temps." />
+  <!-- TODO: Ajouter twitter:image -->
+
+  <!-- ══════ SECURITY META ══════ -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- ══════ FAVICON (TODO: remplacer par vrais fichiers) ══════ -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23c9a84c'/></svg>" type="image/svg+xml" />
+
+  <!-- ══════ JSON-LD STRUCTURED DATA ══════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ImmoAI",
+    "url": "https://immo-ai.online",
+    "description": "Assistant IA pour agents immobiliers indépendants à Bruxelles. Automatisation des relances, rédaction d'annonces et suivi prospects.",
+    "founder": {
+      "@type": "Person",
+      "name": "Abdelkrim Amrani"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Bruxelles",
+      "containedInPlace": {
+        "@type": "Country",
+        "name": "Belgique"
+      }
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "contact@immo-ai.online",
+      "contactType": "customer service",
+      "availableLanguage": ["French", "Dutch"]
+    }
+  }
+  </script>
+
+  <!-- ══════ FONTS ══════ -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
   <style>
+    /* ══════════════════════════════════════
+       RESET & VARIABLES
+    ══════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #0e1a2e;
@@ -23,6 +84,8 @@
       --gold3: #f2dfa0;
       --white: #f0f2f5;
       --muted: #8fa3be;
+      --error: #E8523A;
+      --success: #4caf50;
     }
     html { scroll-behavior: smooth; }
     body {
@@ -33,10 +96,7 @@
     }
     :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
-    /* ── SVG FILTER for liquid glass refraction ── */
-    .svg-filters { position: absolute; width: 0; height: 0; }
-
-    /* ── Grain ── */
+    /* ── Grain overlay ── */
     body::after {
       content: ''; position: fixed; inset: 0; z-index: 9999;
       pointer-events: none; opacity: .03;
@@ -44,7 +104,9 @@
       background-repeat: repeat; background-size: 200px;
     }
 
-    /* ── Typography ── */
+    /* ══════════════════════════════════════
+       TYPOGRAPHY
+    ══════════════════════════════════════ */
     h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); line-height: 1.02; font-weight: 800; letter-spacing: -0.045em; text-wrap: balance; }
     h2 { font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.08; font-weight: 700; letter-spacing: -0.035em; text-wrap: balance; }
     h3 { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; }
@@ -71,13 +133,11 @@
       backdrop-filter: blur(24px) saturate(1.5) brightness(1.15);
       -webkit-backdrop-filter: blur(24px) saturate(1.5) brightness(1.15);
     }
-    /* Top shine edge */
     .liquid-glass::before {
       content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
       z-index: 2;
     }
-    /* Inner refraction glow */
     .liquid-glass::after {
       content: ''; position: absolute; inset: 0;
       background:
@@ -102,19 +162,60 @@
       z-index: 2;
     }
 
-    /* ── Scroll reveal ── */
+    /* ══════════════════════════════════════
+       SCROLL REVEAL + REDUCED MOTION
+    ══════════════════════════════════════ */
     .reveal { opacity: 0; transform: translateY(36px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
     .reveal.visible { opacity: 1; transform: none; }
     .reveal-d1 { transition-delay: .12s; }
     .reveal-d2 { transition-delay: .24s; }
     .reveal-d3 { transition-delay: .36s; }
+
+    /* FIX ACCESSIBILITÉ : respect prefers-reduced-motion */
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .blob { animation: none !important; }
+      .visual-card-wrap { animation: none !important; }
+      .logo-dot { animation: none !important; }
     }
 
-    /* ══════ NAV ══════ */
+    /* ══════════════════════════════════════
+       READING PROGRESS BAR (UX)
+    ══════════════════════════════════════ */
+    .reading-progress {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 200;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      width: 0%; transition: width 50ms linear;
+      box-shadow: 0 0 8px rgba(212,175,55,.4);
+    }
+
+    /* ══════════════════════════════════════
+       BACK TO TOP BUTTON (UX)
+    ══════════════════════════════════════ */
+    .back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 150;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: var(--bg); border: none; cursor: pointer;
+      display: grid; place-items: center;
+      box-shadow: 0 4px 24px rgba(212,175,55,.35);
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .3s ease, transform .3s ease;
+      pointer-events: none;
+    }
+    .back-to-top.show {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+    .back-to-top:hover {
+      transform: translateY(-3px); box-shadow: 0 8px 36px rgba(212,175,55,.5);
+    }
+    .back-to-top svg { width: 22px; height: 22px; }
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: .8rem 0; transition: all .5s cubic-bezier(.16,1,.3,1);
     }
     nav.scrolled {
@@ -147,10 +248,12 @@
     }
     .nav-cta:hover { background: var(--gold); color: var(--bg); transform: translateY(-2px); box-shadow: 0 4px 24px rgba(212,175,55,.35); }
 
-    /* ══════ HERO ══════ */
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
     #hero {
       min-height: 100dvh; display: flex; align-items: center;
-      padding: 130px 0 100px; position: relative; overflow: hidden;
+      padding: 120px 0 80px; position: relative; overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
@@ -167,7 +270,6 @@
         linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
       background-size: 80px 80px;
     }
-    /* Animated blobs */
     .blob {
       position: absolute; border-radius: 50%; pointer-events: none; z-index: 0;
       animation: blobMove 18s ease-in-out infinite;
@@ -210,7 +312,7 @@
     }
     .hero-subtitle {
       font-size: 1.08rem; font-weight: 400;
-      color: rgba(255,255,255,.65); margin-bottom: 3rem;
+      color: rgba(255,255,255,.65); margin-bottom: 2.5rem;
     }
     .btn-primary {
       display: inline-flex; align-items: center; gap: .6rem;
@@ -238,12 +340,9 @@
     .hero-visual { display: flex; justify-content: center; align-items: center; }
     .visual-card {
       padding: 2.2rem; width: 100%; max-width: 370px;
-      animation: cardFloat 7s ease-in-out infinite;
     }
     .visual-card > * { position: relative; z-index: 3; }
-    @keyframes cardFloat { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-18px) rotate(.5deg); } }
 
-    /* Gradient border effect */
     .visual-card-wrap {
       position: relative; border-radius: 28px;
       padding: 1px;
@@ -251,6 +350,7 @@
       animation: cardFloat 7s ease-in-out infinite;
     }
     .visual-card-wrap .visual-card { animation: none; }
+    @keyframes cardFloat { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-18px) rotate(.5deg); } }
 
     .vc-header { display: flex; align-items: center; gap: .7rem; font-weight: 700; font-size: .95rem; margin-bottom: 1.6rem; }
     .vc-icon {
@@ -280,7 +380,7 @@
     }
     @keyframes grow { from { width: 0; } }
 
-    .hero-stats { display: flex; gap: 3rem; margin-top: 3.2rem; }
+    .hero-stats { display: flex; gap: 3rem; margin-top: 2.8rem; }
     .stat-num { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
       background: linear-gradient(135deg, var(--gold), var(--gold2));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
@@ -296,13 +396,17 @@
       .blob { display: none; }
     }
 
-    /* ══════ SECTION DIVIDER ══════ */
+    /* ══════════════════════════════════════
+       SECTION DIVIDER
+    ══════════════════════════════════════ */
     .section-divider {
       height: 1px; border: none;
       background: linear-gradient(90deg, transparent, rgba(212,175,55,.2), rgba(255,255,255,.06), rgba(212,175,55,.2), transparent);
     }
 
-    /* ══════ PROBLEM ══════ */
+    /* ══════════════════════════════════════
+       PROBLEM SECTION
+    ══════════════════════════════════════ */
     #problem {
       padding: 130px 0;
       background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
@@ -345,7 +449,9 @@
       .problem-card:first-child .p-left { flex-direction: row; justify-content: center; }
     }
 
-    /* ══════ SOLUTION ══════ */
+    /* ══════════════════════════════════════
+       SOLUTION SECTION
+    ══════════════════════════════════════ */
     #solution { padding: 130px 0; background: var(--bg); position: relative; overflow: hidden; }
     .sol-glow {
       position: absolute; width: 700px; height: 700px;
@@ -391,7 +497,9 @@
       .sol-text .section-head { text-align: center; }
     }
 
-    /* ══════ FORM ══════ */
+    /* ══════════════════════════════════════
+       FORM SECTION
+    ══════════════════════════════════════ */
     #form-section {
       padding: 130px 0;
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
@@ -402,7 +510,6 @@
       max-width: 720px; margin-inline: auto;
     }
     .form-wrapper > * { position: relative; z-index: 3; }
-    /* Gold glow line at top */
     .form-glow {
       position: absolute; top: -1px; left: 3rem; right: 3rem; height: 2px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
@@ -436,6 +543,18 @@
       box-shadow: 0 0 0 3px rgba(212,175,55,.08), 0 0 30px rgba(212,175,55,.06);
       background: rgba(255,255,255,.05);
     }
+    /* FIX : erreur de validation visible */
+    .form-group input.field-error,
+    .form-group textarea.field-error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(232,82,58,.1);
+    }
+    .field-error-msg {
+      color: var(--error); font-size: .78rem; margin-top: .35rem;
+      font-weight: 500; display: none;
+    }
+    .field-error-msg.show { display: block; }
+
     .form-group textarea { min-height: 90px; }
     .form-hint { font-size: .78rem; color: var(--muted); margin-top: .4rem; font-weight: 500; }
 
@@ -457,7 +576,17 @@
     }
     .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 8px 48px rgba(212,175,55,.45), inset 0 1px 0 rgba(255,255,255,.3); }
     .btn-submit:active { transform: scale(.97); }
-    .btn-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* FIX : loader dans le bouton */
+    .btn-submit .spinner {
+      display: none; width: 20px; height: 20px;
+      border: 3px solid rgba(14,26,46,.3); border-top-color: var(--bg);
+      border-radius: 50%; animation: spin .6s linear infinite;
+    }
+    .btn-submit.loading .spinner { display: inline-block; }
+    .btn-submit.loading .btn-text { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .confirmation { display: none; text-align: center; padding: 3rem 1rem; }
     .confirmation.show { display: block; }
@@ -474,7 +603,9 @@
     .confirmation h3 { font-size: 1.6rem; margin-bottom: .7rem; letter-spacing: -0.02em; }
     .confirmation p { color: var(--muted); max-width: 400px; margin-inline: auto; }
 
-    /* ══════ FOOTER ══════ */
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
     footer {
       background: var(--bg);
       color: rgba(255,255,255,.4);
@@ -491,198 +622,313 @@
     footer a:hover { color: var(--gold2); }
     .footer-sep { margin: .6rem 0; opacity: .15; border: none; border-top: 1px solid rgba(255,255,255,.15); width: 60px; margin-inline: auto; }
     .footer-copy { font-size: .72rem; color: rgba(255,255,255,.3); margin-top: 1.5rem; letter-spacing: .04em; font-weight: 500; }
+    /* FIX : lien confidentialité */
+    .footer-privacy { font-size: .75rem; color: rgba(255,255,255,.35); margin-top: .5rem; }
+    .footer-privacy a { color: rgba(255,255,255,.45); text-decoration: underline; text-underline-offset: 2px; }
+    .footer-privacy a:hover { color: var(--gold); }
   </style>
 </head>
 <body>
 
-  <a class="skip-link" href="#form-section" style="position:absolute;top:-100%;left:1rem;background:var(--gold);color:var(--bg);padding:.6rem 1.2rem;border-radius:8px;font-weight:700;z-index:200;text-decoration:none">Aller au formulaire</a>
+  <!-- ══════ READING PROGRESS BAR (UX) ══════ -->
+  <div class="reading-progress" id="readingProgress" role="progressbar" aria-label="Progression de lecture" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
-  <nav id="mainNav">
-    <div class="container nav-inner">
-      <a class="logo" href="#"><span class="logo-dot"></span>ImmoAI</a>
-      <a class="nav-cta" href="#form-section">Je participe</a>
-    </div>
-  </nav>
+  <!-- ══════ SKIP LINK (ACCESSIBILITÉ) ══════ -->
+  <a class="skip-link" href="#main" style="position:absolute;top:-100%;left:1rem;background:var(--gold);color:var(--bg);padding:.6rem 1.2rem;border-radius:8px;font-weight:700;z-index:200;text-decoration:none;transition:top .2s" onfocus="this.style.top='1rem'" onblur="this.style.top='-100%'">Aller au contenu principal</a>
 
-  <!-- ══════ HERO ══════ -->
-  <section id="hero">
-    <div class="hero-bg">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-    </div>
-    <div class="container">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <span class="tag">Solutions IA · Bruxelles</span>
-          <h1>Vous aidez vos clients<br>à trouver le bien de leur vie.<br><em>Qui vous aide, vous ?</em></h1>
-          <p class="hero-subtitle">Nous construisons un outil intelligent pour que les agents immobiliers arrêtent de perdre leur ressource la plus précieuse : le temps.</p>
-          <a class="btn-primary" href="#form-section">
-            Je participe à l'étude
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <div class="hero-stats">
-            <div class="stat-item"><div class="stat-num">3h+</div><div class="stat-lbl">perdues / jour en tâches répétitives</div></div>
-            <div class="stat-item"><div class="stat-num">60%</div><div class="stat-lbl">des relances jamais faites</div></div>
-            <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">gratuit & confidentiel</div></div>
+  <!-- ══════ HEADER + NAV ══════ -->
+  <header>
+    <nav id="mainNav" aria-label="Navigation principale">
+      <div class="container nav-inner">
+        <a class="logo" href="https://immo-ai.online/" aria-label="ImmoAI — Accueil">
+          <span class="logo-dot" aria-hidden="true"></span>ImmoAI
+        </a>
+        <a class="nav-cta" href="#form-section">Je participe</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══════ MAIN CONTENT ══════ -->
+  <main id="main">
+
+    <!-- ══════ HERO ══════ -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+      </div>
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-text">
+            <span class="tag">Solutions IA · Bruxelles</span>
+            <h1 id="hero-title">Vous aidez vos clients<br>à trouver le bien de leur vie.<br><em>Qui vous aide, vous ?</em></h1>
+            <p class="hero-subtitle">Nous construisons un outil intelligent pour que les agents immobiliers arrêtent de perdre leur ressource la plus précieuse : le temps.</p>
+            <a class="btn-primary" href="#form-section">
+              <span>Je participe à l'étude</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <div class="hero-stats" role="list" aria-label="Chiffres clés">
+              <div class="stat-item" role="listitem"><div class="stat-num">3h+</div><div class="stat-lbl">perdues / jour en tâches répétitives</div></div>
+              <div class="stat-item" role="listitem"><div class="stat-num">60%</div><div class="stat-lbl">des relances jamais faites</div></div>
+              <div class="stat-item" role="listitem"><div class="stat-num">100%</div><div class="stat-lbl">gratuit &amp; confidentiel</div></div>
+            </div>
           </div>
-        </div>
-        <div class="hero-visual">
-          <div class="visual-card-wrap">
-            <div class="visual-card liquid-glass">
-              <div class="vc-header">
-                <div class="vc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-                Assistant ImmoAI
+          <div class="hero-visual" aria-hidden="true">
+            <div class="visual-card-wrap">
+              <div class="visual-card liquid-glass">
+                <div class="vc-header">
+                  <div class="vc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                  Assistant ImmoAI
+                </div>
+                <div class="vc-stat"><div><div class="vc-label">Relances automatisées</div><div class="vc-bar"><div class="vc-fill" style="width:82%"></div></div></div><div class="vc-value">+82%</div></div>
+                <div class="vc-stat"><div><div class="vc-label">Temps administratif</div><div class="vc-bar"><div class="vc-fill" style="width:65%;animation-delay:.4s"></div></div></div><div class="vc-value">-65%</div></div>
+                <div class="vc-stat"><div><div class="vc-label">Satisfaction client</div><div class="vc-bar"><div class="vc-fill" style="width:91%;animation-delay:.8s"></div></div></div><div class="vc-value">+91%</div></div>
               </div>
-              <div class="vc-stat"><div><div class="vc-label">Relances automatisées</div><div class="vc-bar"><div class="vc-fill" style="width:82%"></div></div></div><div class="vc-value">+82%</div></div>
-              <div class="vc-stat"><div><div class="vc-label">Temps administratif</div><div class="vc-bar"><div class="vc-fill" style="width:65%;animation-delay:.4s"></div></div></div><div class="vc-value">-65%</div></div>
-              <div class="vc-stat"><div><div class="vc-label">Satisfaction client</div><div class="vc-bar"><div class="vc-fill" style="width:91%;animation-delay:.8s"></div></div></div><div class="vc-value">+91%</div></div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <hr class="section-divider">
+    <hr class="section-divider" aria-hidden="true">
 
-  <!-- ══════ PROBLEM ══════ -->
-  <section id="problem">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="tag">Ce qu'on entend sur le terrain</span>
-        <h2>On vous a écouté sur le terrain</h2>
-        <p>Les agents immobiliers indépendants à Bruxelles font face aux mêmes obstacles, chaque jour.</p>
+    <!-- ══════ PROBLEM ══════ -->
+    <section id="problem" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="tag">Ce qu'on entend sur le terrain</span>
+          <h2 id="problem-title">On vous a écouté sur le terrain</h2>
+          <p>Les agents immobiliers indépendants à Bruxelles font face aux mêmes obstacles, chaque jour.</p>
+        </div>
+        <div class="problem-grid">
+          <div class="problem-card liquid-glass-sm reveal reveal-d1">
+            <div class="p-left">
+              <div class="p-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg></div>
+              <div class="p-num" aria-hidden="true">01</div>
+            </div>
+            <div><h3>Les relances tombent à l'eau</h3><p>Faute de temps, les prospects ne sont jamais relancés au bon moment. Des opportunités précieuses s'évaporent en silence.</p></div>
+          </div>
+          <div class="problem-card liquid-glass-sm reveal reveal-d2">
+            <div class="p-left">
+              <div class="p-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div class="p-num" aria-hidden="true">02</div>
+            </div>
+            <div><h3>Les tâches répétitives volent vos heures</h3><p>Rédiger des annonces, répondre aux mails similaires, mettre à jour les dossiers... Des heures englouties chaque jour.</p></div>
+          </div>
+          <div class="problem-card liquid-glass-sm reveal reveal-d3">
+            <div class="p-left">
+              <div class="p-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+              <div class="p-num" aria-hidden="true">03</div>
+            </div>
+            <div><h3>Les outils existants restent inutilisés</h3><p>Trop complexes, trop génériques ou trop coûteux. Au final, on revient aux tableurs et aux post-its.</p></div>
+          </div>
+        </div>
       </div>
-      <div class="problem-grid">
-        <div class="problem-card liquid-glass-sm reveal reveal-d1">
-          <div class="p-left">
-            <div class="p-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg></div>
-            <div class="p-num">01</div>
+    </section>
+
+    <hr class="section-divider" aria-hidden="true">
+
+    <!-- ══════ SOLUTION ══════ -->
+    <section id="solution" aria-labelledby="solution-title">
+      <div class="sol-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="sol-inner">
+          <div class="sol-text reveal">
+            <div class="section-head">
+              <span class="tag">Notre approche</span>
+              <h2 id="solution-title">Une solution qui fonctionne vraiment</h2>
+            </div>
+            <p>Pas un outil de plus à apprendre. Un assistant intelligent qui travaille en arrière-plan pendant que vous faites ce que vous faites de mieux : <strong style="color:var(--gold)">vendre.</strong></p>
+            <ul class="sol-features">
+              <li><span class="check-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Conçu exclusivement avec des agents bruxellois</li>
+              <li><span class="check-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> S'intègre à votre façon de travailler, sans formation</li>
+              <li><span class="check-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Automatise les tâches sans supprimer le contact humain</li>
+              <li><span class="check-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Simple, rapide, efficace dès le premier jour</li>
+            </ul>
           </div>
-          <div><h3>Les relances tombent à l'eau</h3><p>Faute de temps, les prospects ne sont jamais relancés au bon moment. Des opportunités précieuses s'évaporent en silence.</p></div>
-        </div>
-        <div class="problem-card liquid-glass-sm reveal reveal-d2">
-          <div class="p-left">
-            <div class="p-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            <div class="p-num">02</div>
+          <div class="sol-cards">
+            <div class="sol-card liquid-glass-sm reveal reveal-d1">
+              <div class="sol-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div class="sol-card-info"><h3>Relances automatiques</h3><p>Vos prospects relancés au bon moment, sans effort de votre part.</p></div>
+            </div>
+            <div class="sol-card liquid-glass-sm reveal reveal-d2">
+              <div class="sol-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+              <div class="sol-card-info"><h3>Rédaction assistée</h3><p>Annonces et emails générés en quelques secondes, à votre ton.</p></div>
+            </div>
+            <div class="sol-card liquid-glass-sm reveal reveal-d3">
+              <div class="sol-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><path d="M21 12a9 9 0 1 1-9-9"/></svg></div>
+              <div class="sol-card-info"><h3>Suivi centralisé</h3><p>Tous vos prospects et dossiers au même endroit, sans saisie manuelle.</p></div>
+            </div>
           </div>
-          <div><h3>Les tâches répétitives volent vos heures</h3><p>Rédiger des annonces, répondre aux mails similaires, mettre à jour les dossiers... Des heures englouties chaque jour.</p></div>
-        </div>
-        <div class="problem-card liquid-glass-sm reveal reveal-d3">
-          <div class="p-left">
-            <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-            <div class="p-num">03</div>
-          </div>
-          <div><h3>Les outils existants restent inutilisés</h3><p>Trop complexes, trop génériques ou trop coûteux. Au final, on revient aux tableurs et aux post-its.</p></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <hr class="section-divider">
+    <hr class="section-divider" aria-hidden="true">
 
-  <!-- ══════ SOLUTION ══════ -->
-  <section id="solution">
-    <div class="sol-glow"></div>
-    <div class="container">
-      <div class="sol-inner">
-        <div class="sol-text reveal">
+    <!-- ══════ FORM ══════ -->
+    <section id="form-section" aria-labelledby="form-title">
+      <div class="container">
+        <div class="form-wrapper liquid-glass reveal">
+          <div class="form-glow" aria-hidden="true"></div>
           <div class="section-head">
-            <span class="tag">Notre approche</span>
-            <h2>Une solution qui fonctionne vraiment</h2>
+            <span class="tag">Étude de terrain — 5 min</span>
+            <h2 id="form-title">Aidez-nous à construire<br>l'outil dont vous avez besoin</h2>
+            <p>Vos réponses façonnent directement le produit. 100 % confidentiel.</p>
           </div>
-          <p>Pas un outil de plus à apprendre. Un assistant intelligent qui travaille en arrière-plan pendant que vous faites ce que vous faites de mieux : <strong style="color:var(--gold)">vendre.</strong></p>
-          <ul class="sol-features">
-            <li><span class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Conçu exclusivement avec des agents bruxellois</li>
-            <li><span class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> S'intègre à votre façon de travailler, sans formation</li>
-            <li><span class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Automatise les tâches sans supprimer le contact humain</li>
-            <li><span class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Simple, rapide, efficace dès le premier jour</li>
-          </ul>
-        </div>
-        <div class="sol-cards">
-          <div class="sol-card liquid-glass-sm reveal reveal-d1">
-            <div class="sol-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <div class="sol-card-info"><h3>Relances automatiques</h3><p>Vos prospects relancés au bon moment, sans effort de votre part.</p></div>
-          </div>
-          <div class="sol-card liquid-glass-sm reveal reveal-d2">
-            <div class="sol-card-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-            <div class="sol-card-info"><h3>Rédaction assistée</h3><p>Annonces et emails générés en quelques secondes, à votre ton.</p></div>
-          </div>
-          <div class="sol-card liquid-glass-sm reveal reveal-d3">
-            <div class="sol-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><path d="M21 12a9 9 0 1 1-9-9"/></svg></div>
-            <div class="sol-card-info"><h3>Suivi centralisé</h3><p>Tous vos prospects et dossiers au même endroit, sans saisie manuelle.</p></div>
+          <form id="survey-form" novalidate>
+            <!-- FIX SÉCURITÉ : Honeypot anti-spam -->
+            <div style="position:absolute;left:-9999px;top:-9999px" aria-hidden="true">
+              <label for="website">Ne pas remplir</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="form-group">
+              <label for="q1">1. Quelle tâche vous prend le plus de temps chaque semaine ?<span aria-label="obligatoire">*</span></label>
+              <textarea id="q1" name="q1" rows="3" minlength="10" maxlength="1000" placeholder="Ex : répondre aux emails entrants, rédiger des annonces..." required></textarea>
+              <div class="field-error-msg" id="q1-error" role="alert">Veuillez décrire en quelques mots (10 caractères min.)</div>
+            </div>
+            <div class="form-group">
+              <label for="q2">2. Comment gérez-vous vos relances prospects aujourd'hui ?<span aria-label="obligatoire">*</span></label>
+              <textarea id="q2" name="q2" rows="3" minlength="10" maxlength="1000" placeholder="Ex : tableur Excel, post-it, CRM, de mémoire..." required></textarea>
+              <div class="field-error-msg" id="q2-error" role="alert">Veuillez décrire en quelques mots (10 caractères min.)</div>
+            </div>
+            <div class="form-group">
+              <label for="q3">3. Quels outils digitaux utilisez-vous actuellement ?<span aria-label="obligatoire">*</span></label>
+              <textarea id="q3" name="q3" rows="3" minlength="10" maxlength="1000" placeholder="Ex : Outlook, WhatsApp Business, Immoweb, Trello..." required></textarea>
+              <div class="field-error-msg" id="q3-error" role="alert">Veuillez décrire en quelques mots (10 caractères min.)</div>
+            </div>
+            <div class="form-group">
+              <label for="q4">4. Qu'est-ce qui vous ferait gagner le plus de temps ?<span aria-label="obligatoire">*</span></label>
+              <textarea id="q4" name="q4" rows="3" minlength="10" maxlength="1000" placeholder="Décrivez librement votre idéal..." required></textarea>
+              <div class="field-error-msg" id="q4-error" role="alert">Veuillez décrire en quelques mots (10 caractères min.)</div>
+            </div>
+            <div class="form-group">
+              <label for="email">5. Votre email professionnel<span aria-label="obligatoire">*</span></label>
+              <input type="email" id="email" name="email" placeholder="vous@agence.be" required autocomplete="email" />
+              <div class="field-error-msg" id="email-error" role="alert">Veuillez entrer un email valide.</div>
+              <div class="form-hint">Nous ne partageons jamais vos données. Jamais.</div>
+            </div>
+            <button type="submit" class="btn-submit" id="submit-btn">
+              <span class="btn-text">Envoyer mes réponses <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+          <div class="confirmation" id="confirmation" role="status" aria-live="polite">
+            <div class="conf-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h3>Merci !</h3>
+            <p>Vos réponses ont bien été enregistrées. Nous reviendrons vers vous avec les résultats de l'étude.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <hr class="section-divider">
+  </main>
 
-  <!-- ══════ FORM ══════ -->
-  <section id="form-section">
-    <div class="container">
-      <div class="form-wrapper liquid-glass reveal">
-        <div class="form-glow"></div>
-        <div class="section-head">
-          <span class="tag">Étude de terrain — 5 min</span>
-          <h2>Aidez-nous à construire<br>l'outil dont vous avez besoin</h2>
-          <p>Vos réponses façonnent directement le produit. 100 % confidentiel.</p>
-        </div>
-        <form id="survey-form" novalidate>
-          <div class="form-group"><label for="q1">1. Quelle tâche vous prend le plus de temps chaque semaine ?<span>*</span></label><textarea id="q1" name="q1" placeholder="Ex : répondre aux emails entrants, rédiger des annonces..." required></textarea></div>
-          <div class="form-group"><label for="q2">2. Comment gérez-vous vos relances prospects aujourd'hui ?<span>*</span></label><textarea id="q2" name="q2" placeholder="Ex : tableur Excel, post-it, CRM, de mémoire..." required></textarea></div>
-          <div class="form-group"><label for="q3">3. Quels outils digitaux utilisez-vous actuellement ?<span>*</span></label><textarea id="q3" name="q3" placeholder="Ex : Outlook, WhatsApp Business, Immoweb, Trello..." required></textarea></div>
-          <div class="form-group"><label for="q4">4. Qu'est-ce qui vous ferait gagner le plus de temps ?<span>*</span></label><textarea id="q4" name="q4" placeholder="Décrivez librement votre idéal..." required></textarea></div>
-          <div class="form-group"><label for="email">5. Votre email professionnel<span>*</span></label><input type="email" id="email" name="email" placeholder="vous@agence.be" required /><div class="form-hint">Nous ne partageons jamais vos données. Jamais.</div></div>
-          <button type="submit" class="btn-submit" id="submit-btn">Envoyer mes réponses <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
-        </form>
-        <div class="confirmation" id="confirmation">
-          <div class="conf-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <h3>Merci</h3>
-          <p>Nous reviendrons vers vous avec les résultats.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- ══════ FOOTER ══════ -->
   <footer>
     <div class="container">
-      <div class="footer-logo"><span class="logo-dot" style="animation:none;box-shadow:0 0 12px rgba(212,175,55,.5)"></span>ImmoAI</div>
-      <hr class="footer-sep" />
+      <div class="footer-logo" aria-hidden="true"><span class="logo-dot" style="animation:none;box-shadow:0 0 12px rgba(212,175,55,.5)"></span>ImmoAI</div>
+      <hr class="footer-sep" aria-hidden="true" />
       <p><strong style="color:var(--white)">Abdelkrim Amrani</strong><br>Fondateur · Solutions IA pour agents immobiliers · Bruxelles<br><a href="mailto:contact@immo-ai.online">contact@immo-ai.online</a></p>
       <p class="footer-copy">© 2026 ImmoAI — Tous droits réservés</p>
+      <!-- FIX RGPD : mention de confidentialité -->
+      <p class="footer-privacy">En soumettant le formulaire, vous acceptez que vos données soient utilisées uniquement dans le cadre de cette étude.<br><a href="#form-section">Politique de confidentialité</a></p>
     </div>
   </footer>
 
+  <!-- ══════ BACK TO TOP (UX) ══════ -->
+  <button class="back-to-top" id="backToTop" aria-label="Retour en haut de page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- ══════════════════════════════════════
+       JAVASCRIPT
+  ══════════════════════════════════════ -->
   <script>
+    /* ── Scroll Reveal avec fallback ── */
     const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-      { threshold: 0.08 }
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }),
+      { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
     );
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    /* Fallback : forcer visible après 3s si IntersectionObserver ne trigger pas */
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+    }, 3000);
 
+    /* ── Nav scroll effect ── */
     const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 
+    /* ── Reading progress bar ── */
+    const progressBar = document.getElementById('readingProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+      progressBar.style.width = progress + '%';
+      progressBar.setAttribute('aria-valuenow', Math.round(progress));
+    }, { passive: true });
+
+    /* ── Back to top button ── */
+    const backBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backBtn.classList.toggle('show', window.scrollY > 600);
+    }, { passive: true });
+    backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* ── Form submission ── */
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9qLIjdg3tY4D8ymfGATzUlARWi6w2GSUwCLTf8X8mjJ0iuLzoh41imVMxRekcG7Vg/exec';
 
     document.getElementById('survey-form').addEventListener('submit', function(e) {
       e.preventDefault();
+
+      /* Honeypot check */
+      if (document.getElementById('website').value) return;
+
       const fields = ['q1','q2','q3','q4','email'];
       let valid = true;
+
+      /* Clear previous errors */
       fields.forEach(id => {
         const el = document.getElementById(id);
-        el.style.borderColor = '';
-        if (!el.value.trim()) { el.style.borderColor = '#E8523A'; valid = false; }
+        el.classList.remove('field-error');
+        const errMsg = document.getElementById(id + '-error');
+        if (errMsg) errMsg.classList.remove('show');
       });
-      if (!valid) return;
-      const emailEl = document.getElementById('email');
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) { emailEl.style.borderColor = '#E8523A'; return; }
 
+      /* Validate */
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        const errMsg = document.getElementById(id + '-error');
+        if (id === 'email') {
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())) {
+            el.classList.add('field-error');
+            if (errMsg) errMsg.classList.add('show');
+            valid = false;
+          }
+        } else {
+          if (el.value.trim().length < 10) {
+            el.classList.add('field-error');
+            if (errMsg) errMsg.classList.add('show');
+            valid = false;
+          }
+        }
+      });
+
+      if (!valid) {
+        /* Scroll to first error */
+        const firstError = document.querySelector('.field-error');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      /* Submit */
       const btn = document.getElementById('submit-btn');
-      btn.disabled = true; btn.textContent = 'Envoi en cours...';
+      btn.disabled = true;
+      btn.classList.add('loading');
 
       const fd = new FormData();
       fields.forEach(id => fd.append(id, document.getElementById(id).value.trim()));
@@ -694,7 +940,12 @@
         c.classList.add('show');
         c.scrollIntoView({ behavior: 'smooth', block: 'center' });
       })
-      .catch(() => { btn.disabled = false; btn.textContent = 'Envoyer mes réponses'; });
+      .catch(() => {
+        btn.disabled = false;
+        btn.classList.remove('loading');
+        /* FIX : message d'erreur réseau */
+        alert('Une erreur est survenue. Veuillez réessayer ou nous contacter à contact@immo-ai.online');
+      });
     });
   </script>
 </body>
