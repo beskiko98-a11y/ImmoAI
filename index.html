@@ -501,7 +501,7 @@
        FORM SECTION
     ══════════════════════════════════════ */
     #form-section {
-      padding: 130px 0;
+      padding: 130px 0 60px;
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
       scroll-margin-top: 68px; position: relative;
     }
@@ -626,6 +626,30 @@
     .footer-privacy { font-size: .75rem; color: rgba(255,255,255,.35); margin-top: .5rem; }
     .footer-privacy a { color: rgba(255,255,255,.45); text-decoration: underline; text-underline-offset: 2px; }
     .footer-privacy a:hover { color: var(--gold); }
+
+    /* ── Modale confidentialité ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(8px);
+      display: grid; place-items: center;
+      padding: 2rem;
+    }
+    .modal-content {
+      max-width: 600px; width: 100%;
+      max-height: 80vh; overflow-y: auto;
+      padding: 2.5rem; position: relative;
+    }
+    .modal-content h2 { font-size: 1.4rem; margin-bottom: 1.5rem; }
+    .modal-content p { color: var(--muted); font-size: .88rem; margin-bottom: 1rem; line-height: 1.7; }
+    .modal-content a { color: var(--gold); }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; color: var(--white);
+      font-size: 1.8rem; cursor: pointer; line-height: 1;
+      opacity: .6; transition: opacity .2s;
+    }
+    .modal-close:hover { opacity: 1; }
   </style>
 </head>
 <body>
@@ -671,7 +695,7 @@
             <div class="hero-stats" role="list" aria-label="Chiffres clés">
               <div class="stat-item" role="listitem"><div class="stat-num">3h+</div><div class="stat-lbl">perdues / jour en tâches répétitives</div></div>
               <div class="stat-item" role="listitem"><div class="stat-num">60%</div><div class="stat-lbl">des relances jamais faites</div></div>
-              <div class="stat-item" role="listitem"><div class="stat-num">100%</div><div class="stat-lbl">gratuit &amp; confidentiel</div></div>
+              <div class="stat-item" role="listitem"><div class="stat-num">100%</div><div class="stat-lbl">confidentiel &amp; sans engagement</div></div>
             </div>
           </div>
           <div class="hero-visual" aria-hidden="true">
@@ -826,6 +850,20 @@
 
   </main>
 
+  <!-- Modale Politique de confidentialité -->
+  <div class="modal-overlay" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacy-title" style="display:none">
+    <div class="modal-content liquid-glass">
+      <button class="modal-close" id="closePrivacy" aria-label="Fermer">&times;</button>
+      <h2 id="privacy-title">Politique de confidentialité</h2>
+      <p>ImmoAI, représenté par Abdelkrim Amrani, collecte vos réponses et votre adresse email uniquement dans le cadre de cette étude terrain.</p>
+      <p><strong style="color:var(--gold)">Données collectées :</strong> réponses aux 5 questions du formulaire et adresse email professionnelle.</p>
+      <p><strong style="color:var(--gold)">Finalité :</strong> comprendre les besoins des agents immobiliers pour développer notre solution. Vos données ne sont jamais vendues, cédées ni partagées avec des tiers.</p>
+      <p><strong style="color:var(--gold)">Conservation :</strong> vos données sont conservées pendant la durée de l'étude (maximum 12 mois), puis supprimées.</p>
+      <p><strong style="color:var(--gold)">Vos droits :</strong> conformément au RGPD, vous pouvez demander l'accès, la rectification ou la suppression de vos données à tout moment en écrivant à <a href="mailto:contact@immo-ai.online">contact@immo-ai.online</a>.</p>
+      <p><strong style="color:var(--gold)">Hébergement :</strong> les données du formulaire sont transmises via Google Apps Script et stockées sur Google Sheets (serveurs UE).</p>
+    </div>
+  </div>
+
   <!-- ══════ FOOTER ══════ -->
   <footer>
     <div class="container">
@@ -834,7 +872,7 @@
       <p><strong style="color:var(--white)">Abdelkrim Amrani</strong><br>Fondateur · Solutions IA pour agents immobiliers · Bruxelles<br><a href="mailto:contact@immo-ai.online">contact@immo-ai.online</a></p>
       <p class="footer-copy">© 2026 ImmoAI — Tous droits réservés</p>
       <!-- FIX RGPD : mention de confidentialité -->
-      <p class="footer-privacy">En soumettant le formulaire, vous acceptez que vos données soient utilisées uniquement dans le cadre de cette étude.<br><a href="#form-section">Politique de confidentialité</a></p>
+      <p class="footer-privacy">En soumettant le formulaire, vous acceptez que vos données soient utilisées uniquement dans le cadre de cette étude.<br><a href="#" id="privacyLink">Politique de confidentialité</a></p>
     </div>
   </footer>
 
@@ -946,6 +984,17 @@
         /* FIX : message d'erreur réseau */
         alert('Une erreur est survenue. Veuillez réessayer ou nous contacter à contact@immo-ai.online');
       });
+    });
+    /* ── Modale confidentialité ── */
+    document.getElementById('privacyLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('privacyModal').style.display = 'grid';
+    });
+    document.getElementById('closePrivacy').addEventListener('click', function() {
+      document.getElementById('privacyModal').style.display = 'none';
+    });
+    document.getElementById('privacyModal').addEventListener('click', function(e) {
+      if (e.target === this) this.style.display = 'none';
     });
   </script>
 </body>
