@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Autos Cherubini — Cabriolets, Roadsters & Oldtimers à Strombeek-Bever | Voitures d'occasion</title>
+<meta name="description" content="Spécialiste cabriolets, roadsters et oldtimers depuis des décennies à Strombeek-Bever. BMW Z3, Porsche Boxster, Mazda MX-5, VW Beetle Cabriolet. 135 avis clients · 4.8/5 · 97% de recommandation." />
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Autos Cherubini — Cabriolets, Roadsters & Oldtimers" />
+<meta property="og:description" content="Spécialiste cabriolets et oldtimers à Strombeek-Bever. 135 avis · 4.8/5." />
+<meta property="og:locale" content="fr_BE" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+<!-- Structured Data : AutoDealer + LocalBusiness -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoDealer",
+  "name": "Autos Cherubini",
+  "image": "https://prod.pictures.autoscout24.net/listing-images/10f753c2-423a-4f1d-a552-42995f513289_02f39301-ad1d-4880-a3ed-697dbf3e2cef.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Hoveniersstraat 18/20",
+    "addressLocality": "Strombeek-Bever",
+    "postalCode": "1853",
+    "addressCountry": "BE"
+  },
+  "telephone": "+3222622177",
+  "email": "autos.cherubini@skynet.be",
+  "url": "https://www.autoscout24.be/fr/professional/autos-cherubini",
+  "openingHours": "Mo-Sa by appointment",
+  "priceRange": "€€",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "135"
+  },
+  "makesOffer": ["BMW", "Audi", "Mazda", "Alfa Romeo", "Volkswagen", "Mitsubishi", "Jeep"]
+}
+</script>
+
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #2A2A2A;
+  background: #FAFAFA;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --noir: #0F0F0F;
+  --blanc: #FAFAFA;
+  --rouge: #C8102E;
+  --gris-fonce: #2A2A2A;
+  --gris-clair: #E5E5E5;
+  --whatsapp: #25D366;
+  --max-w: 1280px;
+  --pad-x: clamp(20px, 4vw, 60px);
+}
+
+/* ============================================================
+   PROGRESS BAR & WHATSAPP FLOAT
+   ============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: var(--rouge);
+  z-index: 1000;
+  transition: width 0.1s linear;
+}
+.whatsapp-float {
+  position: fixed; right: 24px; bottom: 24px;
+  width: 60px; height: 60px;
+  background: var(--whatsapp);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+  z-index: 999;
+  transition: transform 0.2s ease;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+.whatsapp-float svg { width: 32px; height: 32px; fill: #fff; }
+
+/* ============================================================
+   SHARED COMPONENTS
+   ============================================================ */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
+.section { padding: clamp(60px, 10vw, 120px) 0; }
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rouge);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(36px, 5.5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 48px;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  transition: all 0.25s ease;
+  border: 2px solid transparent;
+}
+.btn-primary { background: var(--rouge); color: #fff; }
+.btn-primary:hover { background: #a30d24; transform: translateY(-2px); }
+.btn-ghost { border-color: #fff; color: #fff; background: transparent; }
+.btn-ghost:hover { background: #fff; color: var(--noir); }
+.btn-wa { background: var(--whatsapp); color: #fff; }
+.btn-wa:hover { background: #1ea854; transform: translateY(-2px); }
+
+/* Reveal animation */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  color: #fff;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(15,15,15,0.4) 0%, rgba(15,15,15,0.85) 100%),
+    url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=2000&q=80&auto=format&fit=crop') center/cover;
+  /* À remplacer : photo cabriolet/roadster propre au marchand */
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: var(--max-w); width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: var(--rouge);
+}
+.hero h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(56px, 11vw, 144px);
+  line-height: 0.9;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero h1 span { color: var(--rouge); }
+.hero-subtitle {
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 500;
+  max-width: 600px;
+  margin-bottom: 16px;
+  color: #E5E5E5;
+}
+.hero-tagline {
+  font-style: italic;
+  font-size: 16px;
+  color: #B5B5B5;
+  margin-bottom: 48px;
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 16px; }
+
+.scroll-indicator {
+  position: absolute; bottom: 40px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px;
+  color: #fff; opacity: 0.6;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  animation: bounce 2.5s infinite;
+}
+.scroll-indicator::after {
+  content: '';
+  width: 1px; height: 50px;
+  background: #fff;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ============================================================
+   STATS BAND
+   ============================================================ */
+.stats-band {
+  background: var(--noir);
+  color: #fff;
+  padding: 80px 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+.stat-number {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(56px, 8vw, 96px);
+  line-height: 1;
+  color: var(--rouge);
+  margin-bottom: 12px;
+}
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #B5B5B5;
+}
+
+/* ============================================================
+   SPECIALITES
+   ============================================================ */
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+}
+.specialty-card {
+  padding: 40px 32px;
+  background: #fff;
+  border: 1px solid var(--gris-clair);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.specialty-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 0; height: 3px;
+  background: var(--rouge);
+  transition: width 0.4s ease;
+}
+.specialty-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+.specialty-card:hover::before { width: 100%; }
+.specialty-icon {
+  width: 56px; height: 56px;
+  margin-bottom: 24px;
+  color: var(--rouge);
+}
+.specialty-card h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.specialty-card p {
+  font-size: 15px;
+  color: #555;
+}
+
+/* ============================================================
+   VEHICULES
+   ============================================================ */
+.vehicles-section { background: #fff; }
+.vehicles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+.vehicle-card {
+  background: #fff;
+  border: 1px solid var(--gris-clair);
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.vehicle-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.12);
+}
+.vehicle-img-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--noir);
+}
+.vehicle-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.vehicle-card:hover .vehicle-img-wrap img { transform: scale(1.08); }
+.vehicle-badge {
+  position: absolute; top: 16px; left: 16px;
+  background: var(--rouge);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 1.5px;
+  padding: 6px 12px;
+  text-transform: uppercase;
+}
+.vehicle-body { padding: 28px; }
+.vehicle-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 8px;
+}
+.vehicle-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+.vehicle-specs {
+  display: flex; flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gris-clair);
+}
+.vehicle-specs span { display: flex; align-items: center; gap: 6px; }
+.vehicle-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px;
+}
+.vehicle-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--rouge);
+}
+.btn-vehicle {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 16px;
+  background: var(--noir);
+  color: #fff;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  transition: background 0.2s ease;
+}
+.btn-vehicle:hover { background: var(--whatsapp); }
+.btn-vehicle svg { width: 14px; height: 14px; fill: currentColor; }
+
+/* ============================================================
+   POURQUOI NOUS
+   ============================================================ */
+.why-section { background: var(--noir); color: #fff; }
+.why-section .section-title { color: #fff; }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 60px;
+  margin-top: 60px;
+}
+.why-pillar { text-align: center; }
+.why-icon {
+  width: 64px; height: 64px;
+  margin: 0 auto 24px;
+  color: var(--rouge);
+}
+.why-pillar h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 28px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.why-pillar p { color: #B5B5B5; font-size: 15px; }
+
+/* ============================================================
+   AVIS
+   ============================================================ */
+.reviews-header {
+  display: flex; align-items: center; gap: 40px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+.reviews-rating {
+  font-family: 'Anton', sans-serif;
+  font-size: 64px;
+  color: var(--rouge);
+  line-height: 1;
+}
+.reviews-rating-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #666;
+}
+.stars { color: #F5A623; font-size: 20px; letter-spacing: 2px; }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+.review-card {
+  padding: 32px;
+  background: #fff;
+  border: 1px solid var(--gris-clair);
+  position: relative;
+}
+.review-card::before {
+  content: '"';
+  position: absolute;
+  top: 12px; left: 24px;
+  font-family: 'Anton', sans-serif;
+  font-size: 72px;
+  color: var(--rouge);
+  opacity: 0.2;
+  line-height: 1;
+}
+.review-stars { color: #F5A623; margin-bottom: 16px; letter-spacing: 2px; }
+.review-text {
+  font-style: italic;
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: #444;
+  position: relative; z-index: 1;
+}
+.review-author {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--noir);
+  font-weight: 700;
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-section { background: #fff; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.contact-info h2 { margin-bottom: 32px; }
+.contact-item {
+  display: flex; gap: 16px;
+  margin-bottom: 24px;
+  align-items: flex-start;
+}
+.contact-icon {
+  width: 24px; height: 24px;
+  flex-shrink: 0;
+  color: var(--rouge);
+  margin-top: 4px;
+}
+.contact-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 4px;
+}
+.contact-value { font-size: 17px; font-weight: 500; }
+.contact-actions {
+  display: flex; flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+.contact-map {
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, var(--noir) 0%, #2A2A2A 100%);
+  position: relative;
+  overflow: hidden;
+}
+.contact-map iframe {
+  width: 100%; height: 100%;
+  border: 0;
+  filter: grayscale(0.3) contrast(1.05);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: var(--noir);
+  color: #B5B5B5;
+  padding: 60px 0 30px;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Anton', sans-serif;
+  font-size: 32px;
+  letter-spacing: 2px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.footer-tagline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rouge);
+  margin-bottom: 32px;
+}
+.footer-info { font-size: 14px; margin-bottom: 12px; }
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #2A2A2A;
+  font-size: 12px;
+  color: #666;
+}
+.footer-credit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.footer-credit a { color: var(--rouge); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-map { aspect-ratio: 4/3; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+  .whatsapp-float { width: 54px; height: 54px; right: 16px; bottom: 16px; }
+  .whatsapp-float svg { width: 28px; height: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="progress-bar"></div>
+
+<!-- WhatsApp floating button -->
+<a href="https://wa.me/32475958527?text=Bonjour%2C%20je%20viens%20du%20site%20Cherubini%20et%20je%20souhaite%20avoir%20plus%20d'informations."
+   class="whatsapp-float" aria-label="Contacter sur WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- ============================================================
+     1. HERO
+     ============================================================ -->
+<header class="hero">
+  <div class="hero-inner reveal">
+    <div class="hero-eyebrow">Strombeek-Bever · 135 avis · 4.8 / 5</div>
+    <h1>Autos<br/><span>Cherubini</span></h1>
+    <p class="hero-subtitle">Spécialiste cabriolets, roadsters et oldtimers</p>
+    <p class="hero-tagline">La passion automobile, dans toute son authenticité.</p>
+    <div class="hero-ctas">
+      <a href="#vehicules" class="btn btn-primary">Voir nos véhicules →</a>
+      <a href="https://wa.me/32475958527?text=Bonjour%2C%20je%20souhaite%20visiter%20votre%20showroom."
+         class="btn btn-wa" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</header>
+
+<!-- ============================================================
+     2. STATS BAND
+     ============================================================ -->
+<section class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal">
+        <div class="stat-number" data-target="135">0</div>
+        <div class="stat-label">Avis clients</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-number"><span data-target="4.8" data-decimal="1">0</span>/5</div>
+        <div class="stat-label">Note moyenne</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-number"><span data-target="97">0</span>%</div>
+        <div class="stat-label">Recommandation</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-number"><span data-target="12">0</span></div>
+        <div class="stat-label">Véhicules en stock</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. SPÉCIALITÉS
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Notre savoir-faire</div>
+      <h2 class="section-title">Une passion,<br/>quatre spécialités.</h2>
+    </div>
+    <div class="specialties-grid">
+      <div class="specialty-card reveal">
+        <svg class="specialty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13l2-5h14l2 5M5 13h14v5H5v-5zM7 18v2M17 18v2"/><circle cx="7" cy="15.5" r="1" fill="currentColor"/><circle cx="17" cy="15.5" r="1" fill="currentColor"/></svg>
+        <h3>Cabriolets</h3>
+        <p>Audi A4, Alfa Romeo Spider, des cabriolets sélectionnés pour le plaisir du toit ouvert.</p>
+      </div>
+      <div class="specialty-card reveal">
+        <svg class="specialty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 14l2-4h6l3-3h7l2 7M2 14v4h20v-4M2 14h20"/><circle cx="6" cy="17" r="1.5" fill="currentColor"/><circle cx="18" cy="17" r="1.5" fill="currentColor"/></svg>
+        <h3>Roadsters</h3>
+        <p>BMW Z3, Z4, Mazda MX-5 — l'ADN du roadster sportif.</p>
+      </div>
+      <div class="specialty-card reveal">
+        <svg class="specialty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h3>Oldtimers</h3>
+        <p>Des classiques préservés avec passion, prêts pour la route ou la collection.</p>
+      </div>
+      <div class="specialty-card reveal">
+        <svg class="specialty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3 7-7M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2"/></svg>
+        <h3>Véhicules révisés</h3>
+        <p>Chaque voiture est contrôlée et préparée avant la vente. État exceptionnel garanti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. VÉHICULES EN STOCK
+     ============================================================ -->
+<section id="vehicules" class="section vehicles-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Stock actuel</div>
+      <h2 class="section-title">Nos véhicules<br/>d'exception.</h2>
+    </div>
+    <div class="vehicles-grid">
+
+      <!-- Porsche Boxster (pièce maîtresse) -->
+      <article class="vehicle-card reveal">
+        <div class="vehicle-img-wrap">
+          <span class="vehicle-badge">Cabriolet</span>
+          <img src="img/alfa-spider.webp" alt="Alfa Romeo Spider 2.2 JTS au showroom Autos Cherubini" loading="lazy" />
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta">2007 · Cabriolet</div>
+          <h3 class="vehicle-title">Alfa Romeo Spider 2.2 JTS</h3>
+          <div class="vehicle-specs">
+            <span>Essence</span><span>·</span>
+            <span>Manuelle</span><span>·</span>
+            <span>Décapotable</span>
+          </div>
+          <div class="vehicle-footer">
+            <div class="vehicle-price">€ 14 950</div>
+            <a class="btn-vehicle" target="_blank" rel="noopener"
+               href="https://wa.me/32475958527?text=Bonjour%2C%20je%20suis%20intéressé(e)%20par%20l'Alfa%20Romeo%20Spider%202.2%20JTS%20(2007)%20à%20%E2%82%AC14.950.">
+              Plus d'infos
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- BMW Z3 1.8i Roadster 1998 (vraie photo AutoScout24) -->
+      <article class="vehicle-card reveal">
+        <div class="vehicle-img-wrap">
+          <span class="vehicle-badge">Oldtimer</span>
+          <img src="img/bmw-z3-18i.jpg" alt="BMW Z3 1.8i Roadster Oldtimer au showroom Autos Cherubini" loading="lazy" />
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta">1998 · Roadster</div>
+          <h3 class="vehicle-title">BMW Z3 1.8i Roadster</h3>
+          <div class="vehicle-specs">
+            <span>Essence</span><span>·</span>
+            <span>Manuelle</span><span>·</span>
+            <span>Oldtimer</span>
+          </div>
+          <div class="vehicle-footer">
+            <div class="vehicle-price">€ 12 950</div>
+            <a class="btn-vehicle" target="_blank" rel="noopener"
+               href="https://wa.me/32475958527?text=Bonjour%2C%20je%20suis%20intéressé(e)%20par%20la%20BMW%20Z3%201.8i%20Roadster%20Oldtimer%20(1998)%20à%20%E2%82%AC12.950.">
+              Plus d'infos
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Audi A4 Cabriolet (vraie photo) -->
+      <article class="vehicle-card reveal">
+        <div class="vehicle-img-wrap">
+          <span class="vehicle-badge">Cabriolet</span>
+          <img src="img/audi-a4.jpg" alt="Audi A4 Cabriolet 1.8 Turbo au showroom Autos Cherubini" loading="lazy" />
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta">2006 · Cabriolet</div>
+          <h3 class="vehicle-title">Audi A4 Cabriolet 1.8T</h3>
+          <div class="vehicle-specs">
+            <span>Essence</span><span>·</span>
+            <span>Manuelle</span><span>·</span>
+            <span>Décapotable</span>
+          </div>
+          <div class="vehicle-footer">
+            <div class="vehicle-price">€ 11 900</div>
+            <a class="btn-vehicle" target="_blank" rel="noopener"
+               href="https://wa.me/32475958527?text=Bonjour%2C%20je%20suis%20intéressé(e)%20par%20l'Audi%20A4%20Cabriolet%201.8T%20(2006)%20à%20%E2%82%AC11.900.">
+              Plus d'infos
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- VW Beetle Cabriolet Allstar -->
+      <article class="vehicle-card reveal">
+        <div class="vehicle-img-wrap">
+          <span class="vehicle-badge">Roadster</span>
+          <img src="img/bmw-z4.webp" alt="BMW Z4 2.2i 24v Pack au showroom Autos Cherubini" loading="lazy" />
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta">2004 · Roadster</div>
+          <h3 class="vehicle-title">BMW Z4 2.2i 24v Pack</h3>
+          <div class="vehicle-specs">
+            <span>Essence</span><span>·</span>
+            <span>Manuelle</span><span>·</span>
+            <span>Décapotable</span>
+          </div>
+          <div class="vehicle-footer">
+            <div class="vehicle-price">€ 14 950</div>
+            <a class="btn-vehicle" target="_blank" rel="noopener"
+               href="https://wa.me/32475958527?text=Bonjour%2C%20je%20suis%20intéressé(e)%20par%20la%20BMW%20Z4%202.2i%2024v%20Pack%20(2004)%20à%20%E2%82%AC14.950.">
+              Plus d'infos
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- BMW Z3 2.2i Roadster 2001 -->
+      <article class="vehicle-card reveal">
+        <div class="vehicle-img-wrap">
+          <span class="vehicle-badge">Oldtimer</span>
+          <img src="img/bmw-z3-19i.webp" alt="BMW Z3 1.9i Roadster 140CV au showroom Autos Cherubini" loading="lazy" />
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta">1998 · Roadster</div>
+          <h3 class="vehicle-title">BMW Z3 1.9i 140CV</h3>
+          <div class="vehicle-specs">
+            <span>Essence</span><span>·</span>
+            <span>Manuelle</span><span>·</span>
+            <span>Oldtimer</span>
+          </div>
+          <div class="vehicle-footer">
+            <div class="vehicle-price">€ 12 950</div>
+            <a class="btn-vehicle" target="_blank" rel="noopener"
+               href="https://wa.me/32475958527?text=Bonjour%2C%20je%20suis%20intéressé(e)%20par%20la%20BMW%20Z3%201.9i%20140CV%20(1998)%20à%20%E2%82%AC12.950.">
+              Plus d'infos
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Mazda MX-5 -->
+      <article class="vehicle-card reveal">
+        <div class="vehicle-img-wrap">
+          <span class="vehicle-badge">Roadster</span>
+          <img src="img/mazda-mx5.webp" alt="Mazda MX-5 1.8i Active Technic au showroom Autos Cherubini" loading="lazy" />
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta">2011 · Roadster</div>
+          <h3 class="vehicle-title">Mazda MX-5 1.8i Active</h3>
+          <div class="vehicle-specs">
+            <span>Essence</span><span>·</span>
+            <span>Manuelle</span><span>·</span>
+            <span>Décapotable</span>
+          </div>
+          <div class="vehicle-footer">
+            <div class="vehicle-price">€ 11 950</div>
+            <a class="btn-vehicle" target="_blank" rel="noopener"
+               href="https://wa.me/32475958527?text=Bonjour%2C%20je%20suis%20intéressé(e)%20par%20la%20Mazda%20MX-5%201.8i%20Active%20(2011)%20à%20%E2%82%AC11.950.">
+              Plus d'infos
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. POURQUOI NOUS CHOISIR
+     ============================================================ -->
+<section class="section why-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow" style="color: var(--rouge)">Pourquoi Cherubini</div>
+      <h2 class="section-title">Trois engagements,<br/>aucun compromis.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-pillar reveal">
+        <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>Expertise</h3>
+        <p>Des décennies de passion pour les cabriolets, roadsters et oldtimers. Chaque véhicule sélectionné, contrôlé, préparé.</p>
+      </div>
+      <div class="why-pillar reveal">
+        <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <h3>Transparence</h3>
+        <p>Historique complet, état réel, honnêteté commerciale. Nos clients le disent : « passion, qualité, sérieux ».</p>
+      </div>
+      <div class="why-pillar reveal">
+        <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11l-3-3-3 3M19 8v8"/></svg>
+        <h3>Service</h3>
+        <p>Accueil sur rendez-vous, conseil personnalisé, suivi après-vente. Une relation, pas une transaction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. AVIS CLIENTS
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Avis vérifiés</div>
+      <h2 class="section-title">Ce que disent<br/>nos clients.</h2>
+    </div>
+    <div class="reviews-header reveal">
+      <div>
+        <div class="reviews-rating">4.8<span style="font-size:32px;color:#888;">/5</span></div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div>
+        <div class="reviews-rating-meta">135 évaluations vérifiées</div>
+        <div class="reviews-rating-meta" style="margin-top: 6px;">97 % de recommandation</div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Vendeur très professionnel et sympathique, les véhicules présentés sont révisés et dans un état exceptionnel.</p>
+        <div class="review-author">— Vincent Debischop</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Le patron et son épouse sont très gentils et serviables. Ils m'ont bien aidé à répondre à toutes mes questions.</p>
+        <div class="review-author">— Yvo Vanzurpele</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Honnêteté, passion et véhicules de qualité.</p>
+        <div class="review-author">— Robin Van Peborgh</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Très sérieux. Répond et réagit rapidement. Est attentif aux demandes et remarques clients.</p>
+        <div class="review-author">— Corman</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. CONTACT
+     ============================================================ -->
+<section id="contact" class="section contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="eyebrow">Nous trouver</div>
+        <h2 class="section-title">Venez nous<br/>rencontrer.</h2>
+
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <div class="contact-label">Adresse</div>
+            <div class="contact-value">Hoveniersstraat 18/20<br/>1853 Strombeek-Bever</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <div>
+            <div class="contact-label">Téléphone</div>
+            <div class="contact-value">+32 2 262 21 77<br/>+32 475 95 85 27</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">autos.cherubini@skynet.be</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div>
+            <div class="contact-label">Horaires</div>
+            <div class="contact-value">Sur rendez-vous</div>
+          </div>
+        </div>
+
+        <div class="contact-actions">
+          <a href="tel:+3222622177" class="btn btn-primary">Appeler</a>
+          <a href="https://wa.me/32475958527?text=Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous."
+             class="btn btn-wa" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Hoveniersstraat+18,+1853+Strombeek-Bever"
+             class="btn" style="background: var(--noir); color: #fff;" target="_blank" rel="noopener">Itinéraire</a>
+        </div>
+      </div>
+
+      <div class="contact-map reveal">
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=4.3320%2C50.9000%2C4.3520%2C50.9120&layer=mapnik&marker=50.9060%2C4.3420"
+          loading="lazy"
+          title="Carte Autos Cherubini"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">AUTOS CHERUBINI</div>
+    <div class="footer-tagline">Cabriolets · Roadsters · Oldtimers</div>
+    <div class="footer-info">Hoveniersstraat 18/20 — 1853 Strombeek-Bever</div>
+    <div class="footer-info">+32 2 262 21 77 — autos.cherubini@skynet.be</div>
+    <div class="footer-bottom">
+      © 2026 Autos Cherubini. Tous droits réservés.
+      <div class="footer-credit">
+        Démo conçue par <a href="https://amrani-consulting.be" target="_blank" rel="noopener">Amrani Consulting</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   Progress bar
+   ============================================================ */
+(function() {
+  const bar = document.getElementById('progress-bar');
+  function update() {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = scrolled + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+})();
+
+/* ============================================================
+   Reveal on scroll (IntersectionObserver)
+   ============================================================ */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ============================================================
+   Animated counters
+   ============================================================ */
+(function() {
+  function animate(el) {
+    const target = parseFloat(el.dataset.target);
+    const decimal = parseInt(el.dataset.decimal || 0);
+    const duration = 1800;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+      const value = target * eased;
+      el.textContent = decimal ? value.toFixed(decimal) : Math.floor(value);
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = decimal ? target.toFixed(decimal) : target;
+    }
+    requestAnimationFrame(tick);
+  }
+  const counters = document.querySelectorAll('[data-target]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => io.observe(c));
+})();
+</script>
+
+</body>
+</html>
